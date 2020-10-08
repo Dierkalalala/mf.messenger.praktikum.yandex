@@ -95,3 +95,16 @@ body{
     top: -10px;
     font-size: 9px;
 }
+.error-title{
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 40px;
+    color: #1E1E1E;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+.error-subtitle{
+    margin-bottom: 70px;
+    margin-top: 0;
+}
+
