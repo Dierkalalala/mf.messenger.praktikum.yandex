@@ -36,4 +36,4 @@ class formSubmitionHandler{
 }
 
 
-new InputPlaceholder(document.querySelectorAll('.auth-form-wrapper .js-input-control'))
+new InputPlaceholder(document.querySelectorAll('.js-input-control'))
