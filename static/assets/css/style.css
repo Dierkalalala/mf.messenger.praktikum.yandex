@@ -427,9 +427,13 @@ body{
 .my-message p{
     margin: 0;
     padding: 11px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    color: #1E1E1E;
 }
 .small-message{
-    padding-right: 55px;
+    padding-right: 45px;
 }
 .my-message{
     justify-content: flex-end;
