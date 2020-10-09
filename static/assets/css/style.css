@@ -692,3 +692,21 @@ body{
 .red-colored{
     color: #FF0000;
 }
+.personal-data-submittion-block{
+    text-align: center;
+}
+.personal-data-submittion-block .default-button{
+    width: 280px;
+    cursor: pointer;
+}
+.personal-form-control{
+    margin: 10px 0;
+    height: 13px;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 13px;
+    color: #999999;
+    text-align: right;
+    border: none;
+    outline: none;
+}
