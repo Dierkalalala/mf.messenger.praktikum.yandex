@@ -617,3 +617,78 @@ body{
 .modal-buttons-row .default-button{
     margin-bottom: 0;
 }
+.personal-account-wrapper{
+    max-width: 90%;
+    width: 510px;
+    margin: 0 auto;
+}
+.profile-sidebar{
+    width: 64px;
+    min-width: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+.profile-sidebar .submit-message{
+    margin-left: 0;
+    transform: rotate(180deg);
+}
+.personal-image input[type=file]{
+    display: none;
+}
+.personal-image-label{
+    background: #EFEFEF;
+    width: 131px;
+    height: 131px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    display: block;
+    overflow: hidden;
+    margin: 0 auto 20px;
+}
+.inner-profile-name{
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 16px;
+    text-align: center;
+    color: #1E1E1E;
+    margin-bottom: 100px;
+}
+.personal-data li{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #EAEAEA;
+}
+.personal-data li:last-child{
+    border-bottom: 0;
+}
+.personal-data li span{
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 13px;
+    color: #1E1E1E;
+}
+.personal-data li p{
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 13px;
+    color: #999999;
+}
+.personal-data ul{
+    padding: 0;
+    margin: 0 0 60px 0;
+}
+.personal-data-change .default-link{
+    display: inline-block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    line-height: 13px;
+    font-weight: 500;
+}
+.red-colored{
+    color: #FF0000;
+}
