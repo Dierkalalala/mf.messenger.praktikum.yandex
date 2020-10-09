@@ -114,42 +114,94 @@
                     <ul>
                         <li>
                         <span>
+                            Имя
+                        </span>
+                            <label>
+                                <input name="first_name" type="text" class="personal-form-control" placeholder="Имя">
+                            </label>
+                        </li>
+                        <li>
+                        <span>
+                            Фамилия
+                        </span>
+                            <label>
+                                <input name="second_name" type="text" class="personal-form-control"
+                                       placeholder="Фамилия">
+                            </label>
+                        </li>
+                        <li>
+                        <span>
+                            Имя в приложении
+                        </span>
+                            <label>
+                                <input name="display_name" type="text" class="personal-form-control"
+                                       placeholder="Имя в приложении">
+                            </label>
+                        </li>
+                        <li>
+                        <span>
                             Почта
                         </span>
                             <label>
-                                <input type="email" class="personal-form-control" placeholder="mail@inbox.com">
+                                <input name="email" type="email" class="personal-form-control"
+                                       placeholder="mail@inbox.com">
                             </label>
                         </li>
                         <li>
                         <span>
-Логин
+                            Логин
                         </span>
                             <label>
-                                <input type="text" class="personal-form-control" placeholder="Логин">
+                                <input name="login" type="text" class="personal-form-control" placeholder="Логин">
                             </label>
                         </li>
                         <li>
                         <span>
-                            Новый пароль
+                            Номер телефона
                         </span>
                             <label>
-                                <input type="password" class="personal-form-control" placeholder="Введите">
+                                <input name="phone" type="text" class="personal-form-control"
+                                       placeholder="Номер телефона">
                             </label>
                         </li>
-                        <li>
-                        <span>
-                            Новый пароль (ещё раз)
-                        </span>
-                            <label>
-                                <input type="password" class="personal-form-control" placeholder="Введите">
-                            </label>
-                        </li>
+
                     </ul>
                 </div>
                 <div class="personal-data-submittion-block">
                     <button type="submit" class="default-button">
                         Сохранить
                     </button>
+
+                </div>
+            </form>
+            <form action="">
+                <div class="personal-data">
+                    <ul>
+                        <li>
+                        <span>
+                            Новый пароль
+                        </span>
+                            <label>
+                                <input name="newPassword" type="password" class="personal-form-control"
+                                       placeholder="Введите">
+                            </label>
+                        </li>
+                        <li>
+                        <span>
+                            Старый пароль
+                        </span>
+                            <label>
+                                <input name="oldPassword" type="password" class="personal-form-control"
+                                       placeholder="Введите">
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+                <div class="personal-data-submittion-block">
+                    <button type="submit" class="default-button">
+                        Изменить пароль
+                    </button>
+
                 </div>
             </form>
         </div>

@@ -710,3 +710,6 @@ body{
     border: none;
     outline: none;
 }
+.personal-image-label{
+    cursor: pointer;
+}

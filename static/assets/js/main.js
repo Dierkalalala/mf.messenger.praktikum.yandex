@@ -25,12 +25,13 @@ class InputPlaceholder {
 class formSubmitionHandler {
     constructor(form) {
         this.form = form;
-        this.form.addEventListener('submit', this.submit)
+        this.form.addEventListener('submit', this.submit.bind(this));
     }
 
     submit(e) {
-
         e.preventDefault();
+        let formData = new FormData(this.form);
+        console.log([...formData])
     }
 
 
@@ -40,8 +41,10 @@ class ChatMessagesBody {
     constructor(body, bodyWrapper) {
         this.body = body;
         this.bodyWrapper = bodyWrapper;
-        window.addEventListener('resize', this.changeMargin.bind(this));
-        window.addEventListener('load', this.changeMargin.bind(this));
+        if (this.body && this.bodyWrapper) {
+            window.addEventListener('resize', this.changeMargin.bind(this));
+            window.addEventListener('load', this.changeMargin.bind(this));
+        }
     }
 
     changeMargin() {
@@ -110,6 +113,7 @@ class ModalTrigger {
         modal.classList.add('active');
 
     }
+
     closeModal() {
 
         this.modalOverLay.classList.remove('active');
@@ -121,16 +125,41 @@ class ModalTrigger {
 }
 
 document.addEventListener("DOMContentLoaded", function (event) {
-    let chatMessagesBody =
-        new ChatMessagesBody(
-            document.querySelector('.chat-messages-body'),
-            document.querySelector('.chat-messages-body-wrapper')
-        );
-    new ModalTrigger(
-        document.querySelectorAll('.js-modal-trigger')
-    )
-    new InputPlaceholder(document.querySelectorAll('.js-input-control'));
-    let chatMenuDropDown = new DropDownWrapper(document.querySelector('.chat-messages-drop'))
-    let chatClipDropDown = new DropDownWrapper(document.querySelector('.clip-wrapper'))
+    try {
+        let chatMessagesBody =
+            new ChatMessagesBody(
+                document.querySelector('.chat-messages-body'),
+                document.querySelector('.chat-messages-body-wrapper')
+            );
+    } catch (e) {
+        console.log('chat messages body has not been initialized')
+    }
+    try {
+        new ModalTrigger(
+            document.querySelectorAll('.js-modal-trigger')
+        )
+    } catch (e) {
+        console.log('modals don\'t work in that page')
+    }
+    try {
+        new InputPlaceholder(document.querySelectorAll('.js-input-control'));
+    } catch (e) {
+        console.log('input placeholder class has not been initialized')
+    }
+    try {
+        let chatMenuDropDown = new DropDownWrapper(document.querySelector('.chat-messages-drop'))
+    } catch (e) {
+        console.log('chat menu drop down has not been initialized')
+    }
+    try {
+        let chatClipDropDown = new DropDownWrapper(document.querySelector('.clip-wrapper'))
+    } catch (e) {
+        console.log('chat clip has not been initialized')
+    }
+    let forms = document.querySelectorAll('form');
+    Array.from(forms).forEach(form => {
+        new formSubmitionHandler(form);
+    })
+
 });
 
