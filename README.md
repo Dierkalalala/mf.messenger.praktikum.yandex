@@ -12,9 +12,3 @@
 можно по данной  «[ссылке](https://silly-goodall-247417.netlify.app/)»
 
 
-
-- «[Реакт](https://github.com/facebook/react)»,
-- «[Эхо](https://github.com/labstack/echo)»,
-- «[Вебпак](https://github.com/webpack/webpack)»,
-- «[ТДенгине](https://github.com/taosdata/TDengine)»,
-- «[Соул-хантинг](https://github.com/vladpereskokov/soul-hunting/)».
