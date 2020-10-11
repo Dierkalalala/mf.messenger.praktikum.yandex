@@ -90,63 +90,67 @@
               fill="#3369F3"/>
     </symbol>
 </svg>
-<main>
-    <div class="page-center">
-        <div class="profile-sidebar sidebar-wrapper">
-            <button type="submit" class="submit-message get-back-button">
-                <svg width="13" height="12">
-                    <use xlink:href="#arrow-right_icon"></use>
-                </svg>
-            </button>
-        </div>
-        <div class="personal-account-wrapper">
-            <div class="personal-image">
-                <label class="personal-image-label">
-                    <input type="file" name="avatar">
-                </label>
+<div class="page-center">
+    <aside class="profile-sidebar sidebar-wrapper">
+        <button type="submit" class="submit-message get-back-button">
+            <svg width="13" height="12">
+                <use xlink:href="#arrow-right_icon"></use>
+            </svg>
+        </button>
+    </aside>
+    <main class="personal-account-wrapper">
+        <div class="personal-image">
+            <label class="personal-image-label">
+                <input type="file" name="avatar">
+            </label>
 
-            </div>
-            <h1 class="inner-profile-name">
-                Арина
-            </h1>
-            <div class="personal-data">
-                <ul>
-                    <li>
+        </div>
+        <h1 class="inner-profile-name">
+            Арина
+        </h1>
+        <div class="personal-data">
+            <table>
+                <tr>
+                    <td>
                         <span>
                             Почта
                         </span>
+                    </td>
+                    <td>
                         <p>
                             mail@inbox.com
                         </p>
-                    </li>
-                    <li>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
                         <span>
                             Логин
                         </span>
+                    </td>
+                    <td>
                         <p>
                             username
                         </p>
-                    </li>
-                </ul>
-            </div>
-            <div class="personal-data personal-data-change">
-                <ul>
-                    <li>
-                        <a href="profile-edit.html" class="default-link">
-                            Изменить данные
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="default-link red-colored">
-                            Выйти
-                        </a>
-                    </li>
-                </ul>
-            </div>
+                    </td>
+                </tr>
+            </table>
         </div>
-    </div>
+        <div class="personal-data personal-data-change">
+            <div class="personal-data-links">
+                <a href="profile-edit.html" class="default-link">
+                    Изменить данные
+                </a>
 
-</main>
+                <a href="#" class="default-link red-colored">
+                    Выйти
+                </a>
+            </div>
+
+        </div>
+    </main>
+</div>
+
 <script src="assets/js/main.js"></script>
 </body>
 </html>

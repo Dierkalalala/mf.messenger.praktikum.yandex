@@ -1,0 +1,29 @@
+{
+  "name": "y-messenger",
+  "version": "1.0.1",
+  "description": "Project for yandex middle front end developer course. Messenger",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dierkalalala/mf.messenger.praktikum.yandex.git"
+  },
+  "keywords": [
+    "messenger",
+    "yandex",
+    "middle-frontend"
+  ],
+  "author": "Kholmurodov Diyor",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dierkalalala/mf.messenger.praktikum.yandex/issues"
+  },
+  "homepage": "https://github.com/Dierkalalala/mf.messenger.praktikum.yandex#readme"
+}

@@ -94,6 +94,10 @@ body{
 .auth-form-buttons-wrapper{
     margin-top: 50px;
 }
+.auth-form-wrapper label input:focus ~ .input-placeholder{
+    top: -10px;
+    font-size: 9px;
+}
 .auth-form-wrapper .js-focused .input-placeholder{
     top: -10px;
     font-size: 9px;
@@ -195,6 +199,7 @@ body{
     height: 32px;
     line-height: 32px;
 }
+
 .js-focused .search-form-placeholder-wrapper{
     left: 20px;
 }
@@ -254,6 +259,7 @@ body{
     line-height: 13px;
     color: #999999;
     margin-bottom: 15px;
+    display: block;
 }
 .sidebar-chat-new-messages{
     padding: 4px;
@@ -363,6 +369,7 @@ body{
     padding: 0;
     font-weight: 500;
     font-size: 12px;
+    cursor: pointer;
 }
 .message_field-label{
     display: block;
@@ -468,17 +475,20 @@ body{
 
 }
 .chat-messages-body{
-    max-height: 100%;
+    max-height: initial;
     overflow: auto;
-    height: 100%;
+    height: auto;
     margin: 10px 0;
-
-}
-.chat-messages-body-wrapper{
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    height: auto;
+    margin-top: auto;
+
+}
+.chat-messages-body-wrapper{
+    flex: 1 1 auto;
+    overflow-y: auto;
+    height: 100%;
 }
 .chat-messages-drop{
     width: 25px;
@@ -502,10 +512,16 @@ body{
 .chat-messages-drop-link svg{
     margin-right: 15px;
 }
+.chat-messages-drop:hover .chat-messages-drop-wrapper{
+
+}
 .chat-messages-drop-wrapper{
     position: absolute;
     right: 0;
-    top: 32px;
+    top: 0;
+    padding-top: 32px;
+}
+.chat-messages-drop-wrapper ul{
     background: #FFFFFF;
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14);
     border-radius: 12px;
@@ -542,7 +558,7 @@ body{
     pointer-events: none;
     transition: 0.3s linear all;
 }
-.chat-messages-drop.active .chat-messages-drop-wrapper{
+.chat-messages-drop:hover .chat-messages-drop-wrapper{
     opacity: 1;
     pointer-events: all;
 }
@@ -551,11 +567,13 @@ body{
 }
 .clip-wrapper .chat-messages-drop-wrapper{
     top: auto;
-    bottom: 52px;
+    bottom: 0;
     right: auto;
     left: 0;
+    padding-bottom: 52px;
+
 }
-.clip-wrapper.active .chat-messages-drop-wrapper{
+.clip-wrapper:hover .chat-messages-drop-wrapper{
     opacity: 1;
     pointer-events: all;
 }
@@ -656,35 +674,36 @@ body{
     color: #1E1E1E;
     margin-bottom: 100px;
 }
-.personal-data li{
+.personal-data tr{
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #EAEAEA;
 }
-.personal-data li:last-child{
+.personal-data tr:last-child{
     border-bottom: 0;
 }
-.personal-data li span{
+.personal-data tr span{
     font-weight: 500;
     font-size: 13px;
     line-height: 13px;
     color: #1E1E1E;
 }
-.personal-data li p{
+.personal-data tr p{
     font-weight: 500;
     font-size: 13px;
     line-height: 13px;
     color: #999999;
 }
-.personal-data ul{
+.personal-data table{
     padding: 0;
     margin: 0 0 60px 0;
+    width: 100%;
 }
 .personal-data-change .default-link{
     display: inline-block;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     font-size: 13px;
     line-height: 13px;
     font-weight: 500;
@@ -712,4 +731,26 @@ body{
 }
 .personal-image-label{
     cursor: pointer;
+}
+.sidebar-chat-img img{
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    min-width: 100%;
+    display: block;
+}
+.personal-data-links {
+    display: flex;
+    flex-direction: column;
+}
+.personal-data-links .default-link{
+    border-bottom: 1px solid #EAEAEA;
+}
+.personal-data-links .default-link:last-child{
+    border-bottom: 0;
+}
+.sidebar-content{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
 }
