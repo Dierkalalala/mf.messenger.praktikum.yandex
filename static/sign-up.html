@@ -7,58 +7,56 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
-<main>
-    <div class="page-center">
-        <div class="auth-form-wrapper">
+<div id="app"></div>
+<script type="module">
+    import rendered from  './src/pages/signUp/index.js'
+    import InputPlaceholder from './src/module/placeholder.js';
+    import submitForm from './src/module/form_handler.js';
+    import Validation from './src/module/Validation.js'
 
-            <form action="" method="post">
-                <div class="upper-form-block">
-                    <h1 class="form-title">
-                        Регистрация
-                    </h1>
-                    <label class="">
-                        <input name="first_name" type="text" class="js-input-control">
-                        <span class="input-placeholder">Имя</span>
-                    </label>
-                    <label>
-                        <input name="second_name" type="text" class="js-input-control">
-                        <span class="input-placeholder">Фамилия</span>
-                    </label>
-                    <label>
-                        <input name="login" type="text" class="js-input-control">
-                        <span class="input-placeholder">Логин</span>
-                    </label>
-                    <label>
-                        <input name="email" type="email" class="js-input-control">
-                        <span class="input-placeholder">Email</span>
-                    </label>
-                    <label>
-                        <input type="password" name="password" class="js-input-control">
-                        <span class="input-placeholder">Пароль</span>
-                    </label>
-                    <label>
-                        <input name="phone" type="tel" class="js-input-control">
-                        <span class="input-placeholder">Номер телефона</span>
-                    </label>
-                </div>
-                <div class="auth-form-buttons-wrapper">
-                    <button type="submit" class="default-button">
-                        Зарегистрироваться
-                    </button>
-                    <div class="text-center">
-                        <a href="index.html" class="default-link">
-                            Войти
-                        </a>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
+    let app = document.querySelector('#app')
 
-</main>
-<script src="assets/js/main.js"></script>
+    app.innerHTML = rendered;
+
+    new InputPlaceholder(document.querySelectorAll('.js-input-control'));
+
+    const inputs = {
+        login: {
+            required: true,
+        },
+        first_name: {
+            required: true,
+        },
+        second_name: {
+            required: true,
+        },
+        email: {
+            required: true,
+            email: true,
+        },
+        password: {
+            required: true,
+            minLength: 6,
+        },
+        phone: {
+            required: true,
+            minLength: 10,
+        }
+    };
+
+    Validation.validate(inputs);
+
+    let forms = document.querySelectorAll('form');
+
+    Array.from(forms).forEach(form => {
+        form.addEventListener('submit', submitForm)
+    })
+
+
+</script>
+
 </body>
 </html>

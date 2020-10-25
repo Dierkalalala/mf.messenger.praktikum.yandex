@@ -7,25 +7,17 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
-<main>
-    <div class="page-center">
-        <div class="error-text-block-wrapper text-center">
-            <h1 class="error-title">
-                404
-            </h1>
-            <h3 class="error-subtitle">
-                Не туда попали
-            </h3>
+<div id="app"></div>
+<script type="module">
+    import rendered from './src/pages/404/index.js'
 
-            <a href="#" class="default-link">Назад к чатам</a>
+    let app = document.querySelector('#app')
 
-        </div>
-    </div>
+    app.innerHTML = rendered;
+</script>
 
-</main>
-<script src="assets/js/main.js"></script>
 </body>
 </html>

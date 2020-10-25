@@ -1,15 +1,21 @@
 {
   "name": "y-messenger",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Project for yandex middle front end developer course. Messenger",
   "main": "server.js",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "postcss": "^8.1.4"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "autoprefixer": "^10.0.1",
+    "mustache": "^4.0.1"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "prefix-css": "postcss --use autoprefixer -b 'last versions' static/assets/css/style.css -o static/assets/css/style.css"
+
   },
   "repository": {
     "type": "git",
