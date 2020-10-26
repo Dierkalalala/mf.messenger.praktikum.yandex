@@ -1,14 +1,11 @@
 import '../../../vendor/templator/index.js';
 import Button from '../../components/button/index.js';
 import pageTemplate from './template.js';
-
 let button = new Button({
     type: 'submit',
     className: 'default-button',
     text: 'Зарегестрироваться'
 });
-
-
 let data = {
     pageTitile: 'Регистрация',
     inputs: [
@@ -42,12 +39,12 @@ let data = {
             type: 'tel',
             placeholder: 'Номер телефона'
         },
-
     ],
     components: {
         button: button.render()
     }
-}
-
+};
+// @ts-ignore
 var rendered = Mustache.render(pageTemplate, data);
-export default rendered
+export default rendered;
+//# sourceMappingURL=index.js.map

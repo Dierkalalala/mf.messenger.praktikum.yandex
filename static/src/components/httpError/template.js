@@ -12,5 +12,6 @@ let template = `
 
         </div>
     </div>
-`
-export default template
+`;
+export default template;
+//# sourceMappingURL=template.js.map

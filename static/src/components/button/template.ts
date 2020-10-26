@@ -1,6 +1,2 @@
-let template: string = `
-    <button type="{{type}}" class="{{className}}">
-        {{text}}
-    </button>
-`
-export default template
+let template: string = "\n    <button type=\"{{type}}\" class=\"{{className}}\">\n        {{text}}\n    </button>\n";
+export default template;

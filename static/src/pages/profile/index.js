@@ -1,10 +1,7 @@
 import '../../../vendor/templator/index.js';
 import Sidebar from '../../components/sidebar/index.js';
-
 import pageTemplate from './template.js';
-let sidebar = new Sidebar({href: 'no-chat.html'});
-
-
+let sidebar = new Sidebar({ href: 'no-chat.html' });
 let data = {
     name: 'Арина',
     profile_img: '',
@@ -21,8 +18,8 @@ let data = {
     components: {
         sidebar: sidebar.render()
     }
-}
-
+};
+// @ts-ignore
 var rendered = Mustache.render(pageTemplate, data);
-
 export default rendered;
+//# sourceMappingURL=index.js.map

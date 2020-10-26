@@ -25,5 +25,6 @@ let pageTemplate = `
             </form>
         </div>
     </div>
-    `
-export default pageTemplate
+    `;
+export default pageTemplate;
+//# sourceMappingURL=template.js.map

@@ -1,9 +1,7 @@
 import '../../../vendor/templator/index.js';
 import ChatSidebar from '../../components/chat-sidebar/index.js';
 import MessagesBlockClass from '../../components/messages/index.js';
-import pageTemplate from './template.js'
-
-
+import pageTemplate from './template.js';
 let messages = [
     {
         is_image: false,
@@ -37,9 +35,7 @@ let messages = [
         time: '11:56',
     },
 ];
-
-let MessagesBlock = new MessagesBlockClass({messages: messages});
-
+let MessagesBlock = new MessagesBlockClass({ messages: messages });
 let sidebar = new ChatSidebar({
     chats: [
         {
@@ -108,7 +104,6 @@ let sidebar = new ChatSidebar({
         },
     ]
 });
-
 let data = {
     chat: {
         name: 'Вадим',
@@ -119,13 +114,12 @@ let data = {
         is_last_message_your: true,
         lastMessage: 'стикер'
     },
-
     components: {
         sidebar: sidebar.render(),
         messages: MessagesBlock.render()
     }
 };
-
+// @ts-ignore
 var rendered = Mustache.render(pageTemplate, data);
-
-export default rendered
+export default rendered;
+//# sourceMappingURL=index.js.map

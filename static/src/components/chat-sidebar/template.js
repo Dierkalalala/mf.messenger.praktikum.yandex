@@ -54,5 +54,6 @@ let template = `
                 
             </ul>
         </aside>
-`
-export default template
+`;
+export default template;
+//# sourceMappingURL=template.js.map

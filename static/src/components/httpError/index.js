@@ -5,14 +5,13 @@ class httpError extends Block {
     constructor(props) {
         // Создаем враппер дом-элемент button
         super("div", props);
-
     }
-
     render() {
         // В проект должен быть ваш собственный шаблонизатор
+        // @ts-ignore
+        console.log(Mustache);
         return Mustache.render(template, this.props);
     }
 }
-
-
-export default httpError
+export default httpError;
+//# sourceMappingURL=index.js.map

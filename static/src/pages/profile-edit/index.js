@@ -1,23 +1,18 @@
 import '../../../vendor/templator/index.js';
 import Sidebar from '../../components/sidebar/index.js';
 import Button from '../../components/button/index.js';
-import pageTemplate from './template.js'
-
-
-let sidebar = new Sidebar({href: '/profile.html'});
+import pageTemplate from './template.js';
+let sidebar = new Sidebar({ href: '/profile.html' });
 let savePersonalDataButton = new Button({
     type: 'submit',
     className: 'default-button',
     text: 'Сохранить'
-})
-
+});
 let savePasswordButton = new Button({
     type: 'submit',
     className: 'default-button',
     text: 'Изменить пароль'
-})
-
-
+});
 let data = {
     name: 'Арина',
     profile_img: '',
@@ -94,8 +89,8 @@ let data = {
         saveButton: savePersonalDataButton.render(),
         savePassButton: savePasswordButton.render()
     }
-}
-
+};
+// @ts-ignore
 var rendered = Mustache.render(pageTemplate, data);
-
-export default rendered
+export default rendered;
+//# sourceMappingURL=index.js.map

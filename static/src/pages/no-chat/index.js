@@ -1,9 +1,6 @@
 import '../../../vendor/templator/index.js';
-
 import ChatSidebar from '../../components/chat-sidebar/index.js';
-
-import pageTemplate from './template.js'
-
+import pageTemplate from './template.js';
 let sidebar = new ChatSidebar({
     chats: [
         {
@@ -77,7 +74,7 @@ let data = {
         sidebar: sidebar.render(),
     }
 };
-
+// @ts-ignore
 var rendered = Mustache.render(pageTemplate, data);
-
-export default rendered
+export default rendered;
+//# sourceMappingURL=index.js.map

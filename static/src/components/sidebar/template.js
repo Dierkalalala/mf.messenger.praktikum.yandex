@@ -9,5 +9,6 @@ let template = `
         </button>
     </aside>
     
-`
+`;
 export default template;
+//# sourceMappingURL=template.js.map
