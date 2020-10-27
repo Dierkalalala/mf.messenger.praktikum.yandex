@@ -109,6 +109,7 @@ const ValidationMethods = {
         return has_errors
     },
 }
+// Опираясь на данную реализацию, возможно ли сделать функции валидации чистыми?
 
 const Validators : ValidatorsType = {
     "email": function (): boolean {

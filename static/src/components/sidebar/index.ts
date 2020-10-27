@@ -6,6 +6,10 @@ import '../../../vendor/templator/index';
 import template from './template';
 import * as Mustache from '../../../typings/mustache';
 
+// Импортировал js так как не мог нормально собрать проект, чтобы он сразу выдавал
+// мне валидный код с правильным расширением и ts пока не может
+// https://github.com/Microsoft/TypeScript/issues/13422 Очень жду спринта с вебпаком =)
+
 class Sidebar extends Block {
     constructor(props: Prop) {
         // Создаем враппер дом-элемент button
