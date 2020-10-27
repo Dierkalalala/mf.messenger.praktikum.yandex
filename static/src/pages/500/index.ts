@@ -1,5 +1,6 @@
-import '../../../vendor/templator/index.js';
-import Error from '../../components/httpError/index.js';
+import '../../../vendor/templator/index';
+import Error from '../../components/httpError/Index';
+
 
 let notFoundError = new Error({
     code: 500,

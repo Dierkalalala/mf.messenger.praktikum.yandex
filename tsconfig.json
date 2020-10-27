@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "outDir": "static/dist",
     "target": "es6",
     "declaration": false,
     "module": "es6",
@@ -10,9 +11,10 @@
     "noUnusedParameters": true,
     "alwaysStrict": true,
     "moduleResolution": "node",
-    "lib": ["es2017", "dom"]
+    "lib": ["es2017", "dom"],
   },
   "include": [
-    "**/*"
+    "**/*",
+    "static/typings/**/*"
   ]
 }

@@ -1,8 +1,9 @@
-import '../../../vendor/templator/index.js';
+import '../../../vendor/templator/index';
 
-import ChatSidebar from '../../components/chat-sidebar/index.js';
+import ChatSidebar from '../../components/chat-sidebar/index';
 
-import pageTemplate from './template.js'
+import pageTemplate from './template'
+import * as Mustache from '../../../typings/mustache';
 
 let sidebar = new ChatSidebar({
     chats: [
@@ -78,7 +79,7 @@ let data = {
     }
 };
 
-// @ts-ignore
+
 var rendered = Mustache.render(pageTemplate, data);
 
 export default rendered

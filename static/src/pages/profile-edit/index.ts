@@ -1,8 +1,8 @@
 import '../../../vendor/templator/index.js';
-import Sidebar from '../../components/sidebar/index.js';
-import Button from '../../components/button/index.js';
-import pageTemplate from './template.js'
-
+import Sidebar from '../../components/sidebar/index';
+import Button from '../../components/button/index';
+import pageTemplate from './template'
+import * as Mustache from '../../../typings/mustache';
 
 let sidebar = new Sidebar({href: '/profile.html'});
 let savePersonalDataButton = new Button({
@@ -16,6 +16,7 @@ let savePasswordButton = new Button({
     className: 'default-button',
     text: 'Изменить пароль'
 })
+
 
 
 let data = {
@@ -96,7 +97,7 @@ let data = {
     }
 }
 
-// @ts-ignore
+
 var rendered = Mustache.render(pageTemplate, data);
 
 export default rendered

@@ -1,6 +1,20 @@
 interface Inputs {
-    [items: string]: { [key: string]: boolean | string | number }
+    [items: string]: { [key: string ] : boolean | string | number }
 }
+
+interface Rule {
+    function: Function,
+    arguments: string | number | boolean
+}
+
+interface ValidatorsType {
+    [key: string]: any
+}
+
+type ValidationK = keyof ValidatorsType
+
+import MailRegExp from './MailRegExp'
+
 const ValidationMethods = {
 
     inputs: {},
@@ -17,21 +31,25 @@ const ValidationMethods = {
         errorTextElement.textContent = text;
     },
 
-    validate: (inputs: Inputs) : void => {
+    validate: (inputs: Inputs): void => {
         ValidationMethods.inputs = inputs;
         for (let name in inputs) {
             let input = document.getElementsByName(name)[0];
-            let rules: {function: Function, arguments: string | number | boolean}[] = [];
-            Object.entries(inputs[name]).forEach((inp: [string, string | number | boolean]) => {
-                // @ts-ignore
-                let validationFunction: Function = ValidationMethods.validators[inp[0]].bind(input);
-                rules.push(
+            let rules: Rule[] = [];
+
+            rules = Object.entries(inputs[name]).reduce((acc: Rule[], inp) => {
+
+                const validationFunctionName : ValidationK = inp[0];
+                const validationFunction: Function = Validators[validationFunctionName].bind(input);
+                const validationArgument: string | number | boolean = inp[1];
+                acc.push(
                     {
                         function: validationFunction,
-                        arguments: inp[1]
+                        arguments: validationArgument,
                     }
                 )
-            })
+                return acc;
+            }, []);
 
             input.addEventListener('blur', () => {
                 for (let i = 0; i < rules.length; i++) {
@@ -54,26 +72,29 @@ const ValidationMethods = {
 
         }
 
-        let has_errors : boolean = false;
+        let has_errors: boolean = false;
 
         for (let name in inputs) {
-            if (!this.elements[name]){
+            if (!this.elements[name]) {
                 continue;
             }
-            let input: HTMLElement = document.getElementsByName(name)[0];
-            let rules: {function: Function, arguments: string | number | boolean}[] = [];
-            Object.entries(inputs[name]).forEach(inp => {
-                // @ts-ignore
-                let validationFunction = ValidationMethods.validators[inp[0]].bind(input);
+            const input = document.getElementsByName(name)[0];
+            let rules: Rule[] = [];
 
+            rules = Object.entries(inputs[name]).reduce((acc: Rule[], inp) => {
 
-                rules.push(
+                const validationFunctionName : ValidationK = inp[0];
+                const validationFunction: Function = Validators[validationFunctionName].bind(input);
+                const validationArgument: string | number | boolean = inp[1];
+                acc.push(
                     {
                         function: validationFunction,
-                        arguments: inp[1]
+                        arguments: validationArgument,
                     }
                 )
-            });
+                return acc;
+            }, []);
+
             let notValid = true;
             for (let i = 0; i < rules.length; i++) {
                 if (notValid) {
@@ -87,38 +108,34 @@ const ValidationMethods = {
         }
         return has_errors
     },
+}
 
-    validators: {
-        email: function () {
-            const re = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-            if (!re.test(String(this.value).toLowerCase())) {
-                ValidationMethods.printErrorMessage(this, ValidationMethods.errorMessages.email)
-
-                return false;
-            }
-            return true
-        } ,
-
-        required: function () {
-            if (this.value === '') {
-
-                ValidationMethods.printErrorMessage(this, ValidationMethods.errorMessages.required)
-
-                return false;
-            }
-            return true
-        },
-
-        minLength: function (length: number) {
-            if (this.value.length < length) {
-                ValidationMethods.printErrorMessage(this, ValidationMethods.errorMessages.minLength.replace('{length}', String(length)));
-                return false
-            }
-            return true;
-        },
+const Validators : ValidatorsType = {
+    "email": function (): boolean {
+        if (!MailRegExp.test(String(this.value).toLowerCase())) {
+            ValidationMethods.printErrorMessage(this, ValidationMethods.errorMessages.email)
+            return false;
+        }
+        return true
     },
 
+    "required": function () : boolean {
+        if (this.value === '') {
 
+            ValidationMethods.printErrorMessage(this, ValidationMethods.errorMessages.required)
+
+            return false;
+        }
+        return true
+    },
+
+    "minLength": function (length: number) : boolean {
+        if (this.value.length < length) {
+            ValidationMethods.printErrorMessage(this, ValidationMethods.errorMessages.minLength.replace('{length}', String(length)));
+            return false
+        }
+        return true;
+    },
 }
 
 export default ValidationMethods

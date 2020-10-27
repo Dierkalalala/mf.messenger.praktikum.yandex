@@ -1,7 +1,8 @@
-import '../../../vendor/templator/index.js';
-import ChatSidebar from '../../components/chat-sidebar/index.js';
-import MessagesBlockClass from '../../components/messages/index.js';
-import pageTemplate from './template.js'
+import '../../../vendor/templator/index';
+import ChatSidebar from '../../components/chat-sidebar/index';
+import MessagesBlockClass from '../../components/messages/index';
+import pageTemplate from './template'
+import * as Mustache from '../../../typings/mustache';
 
 
 let messages = [
@@ -126,7 +127,7 @@ let data = {
     }
 };
 
-// @ts-ignore
+
 var rendered = Mustache.render(pageTemplate, data);
 
 export default rendered

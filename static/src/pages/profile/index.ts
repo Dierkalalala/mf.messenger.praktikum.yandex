@@ -1,9 +1,9 @@
-import '../../../vendor/templator/index.js';
-import Sidebar from '../../components/sidebar/index.js';
+import '../../../vendor/templator/index';
+import Sidebar from '../../components/sidebar/index';
 
-import pageTemplate from './template.js';
+import pageTemplate from './template';
 let sidebar = new Sidebar({href: 'no-chat.html'});
-
+import * as Mustache from '../../../typings/mustache';
 
 let data = {
     name: 'Арина',
@@ -23,7 +23,7 @@ let data = {
     }
 }
 
-// @ts-ignore
+
 var rendered = Mustache.render(pageTemplate, data);
 
 export default rendered;

@@ -1,16 +1,27 @@
-interface Dic {
-    [key: string]: unknown
+interface Props{
+    messages: Array<Prop>
 }
-import Block from '../../../vendor/block/index.js'
-import '../../../vendor/templator/index.js';
-import template from './template.js';
+
+type Prop = {
+    is_image: boolean,
+    is_my_message: boolean,
+    time: string,
+    message?: string,
+    src?: string
+}
+
+import Block from '../../../vendor/block/index'
+import '../../../vendor/templator/index';
+import template from './template';
+import * as Mustache from '../../../typings/mustache';
+
 class Messages extends Block {
-    constructor(props: Dic) {
+    constructor(props: Props) {
         super("div", props);
     }
 
     render() {
-        // @ts-ignore
+
         return Mustache.render(template, this.props);
     }
 }

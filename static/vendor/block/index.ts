@@ -1,20 +1,15 @@
 interface Prop {
     [items: string] : { [key: string]: unknown }
 }
-interface EventBusType {
-    on: Function,
-    off: Function,
-    emit: Function,
-}
 interface ProxyConstructor {
     revocable<T extends object>(target: T, handler: ProxyHandler<T>): { proxy: T; revoke: () => void; };
     new <T extends object>(target: T, handler: ProxyHandler<T>): T;
 }
 declare var Proxy: ProxyConstructor;
-import EventBus from '../eventbus/index.js';
+import EventBus from '../eventbus/index';
 class Block {
     props: Prop;
-    eventBus: Function
+    eventBus: EventBus
     static EVENTS = {
         INIT: "init",
         FLOW_CDM: "flow:component-did-mount",
@@ -43,13 +38,13 @@ class Block {
 
         this.props = this._makePropsProxy(props);
 
-        this.eventBus = () => eventBus;
+        this.eventBus = eventBus;
 
         this._registerEvents(eventBus);
         eventBus.emit(Block.EVENTS.INIT);
     }
 
-    _registerEvents(eventBus: EventBusType) {
+    _registerEvents(eventBus: EventBus) {
         eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
         eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
         eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
@@ -63,7 +58,7 @@ class Block {
 
     init() {
         this._createResources();
-        this.eventBus().emit(Block.EVENTS.FLOW_CDM);
+        this.eventBus.emit(Block.EVENTS.FLOW_CDM);
     }
 
     _componentDidMount() {
@@ -74,7 +69,7 @@ class Block {
 
     // Может переопределять пользователь, необязательно трогать
     componentDidMount(oldProps : Prop) {
-        void oldProps;
+        return oldProps
     }
 
     _componentDidUpdate(oldProps: Prop, newProps: Prop) {
@@ -85,9 +80,7 @@ class Block {
 
     // Может переопределять пользователь, необязательно трогать
     componentDidUpdate(oldProps : Prop, newProps : Prop) {
-        void oldProps;
-        void newProps;
-        return true;
+        return [oldProps, newProps];
     }
 
     setProps = (nextProps: Prop) => {
@@ -130,7 +123,7 @@ class Block {
             },
             set(target:Prop, prop:string, newValue: {[name: string] : unknown}) {
                 target[prop] = newValue;
-                self.eventBus().emit(Block.EVENTS.FLOW_CDU)
+                self.eventBus.emit(Block.EVENTS.FLOW_CDU)
                 return true
             },
             deleteProperty(target:Prop, prop:string) {

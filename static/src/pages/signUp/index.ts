@@ -1,6 +1,7 @@
-import '../../../vendor/templator/index.js';
-import Button from '../../components/button/index.js';
-import pageTemplate from './template.js';
+import '../../../vendor/templator/index';
+import Button from '../../components/button/index';
+import pageTemplate from './template';
+import * as Mustache from '../../../typings/mustache';
 
 let button = new Button({
     type: 'submit',
@@ -49,6 +50,6 @@ let data = {
     }
 }
 
-// @ts-ignore
+
 var rendered = Mustache.render(pageTemplate, data);
 export default rendered

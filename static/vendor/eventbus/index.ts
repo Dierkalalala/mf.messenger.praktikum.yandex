@@ -1,5 +1,5 @@
 interface Listeners {
-    [name: string]: [Array<Function> | Function]
+    [name: string]: [Function] | Function[]
 }
 
 class EventBus {
@@ -20,7 +20,6 @@ class EventBus {
     off(event: string, callback: Function): void {
         this._checkEventForExisence(event);
         if (this.listeners[event] !== undefined) {
-            // @ts-ignore
             this.listeners[event] = this.listeners[event].filter((ecallback: Function) => ecallback !== callback);
         }
     }

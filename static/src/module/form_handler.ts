@@ -1,11 +1,11 @@
-import Validation from './Validation.js'
+import Validation from './Validation'
 
 function submitForm(e: Event): void {
-    let hasErrorsBoundFunc: Function = Validation.validateFieldsImmediately.bind(this);
-    let hasErrors: boolean = hasErrorsBoundFunc();
+    const hasErrorsBoundFunc: Function = Validation.validateFieldsImmediately.bind(this);
+    const hasErrors: boolean = hasErrorsBoundFunc();
     e.preventDefault();
     if (!hasErrors) {
-        let formData = new FormData(this);
+        const formData = new FormData(this);
         console.log(formData);
     }
 

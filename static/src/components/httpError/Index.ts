@@ -4,9 +4,11 @@ interface Prop {
     link_message: string,
     href: string
 }
-import Block from '../../../vendor/block/index.js';
+import Block from '../../../vendor/Block';
 import '../../../vendor/templator/index.js';
-import template from './template.js';
+import template from './Template';
+import * as Mustache from '../../../typings/mustache';
+
 class httpError extends Block {
     constructor(props: Prop) {
         // Создаем враппер дом-элемент button
@@ -18,7 +20,6 @@ class httpError extends Block {
 
         // В проект должен быть ваш собственный шаблонизатор
 
-        // @ts-ignore
         return Mustache.render(template, this.props);
     }
 }
