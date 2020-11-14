@@ -1,13 +1,15 @@
+import Block from '../../../vendor/Block/index.js';
+import '../../../vendor/templator/index.js';
+import template from './Template.js';
+import * as Mustache from '../../../typings/mustache';
+
 interface Prop {
     code: number,
     message: string,
     link_message: string,
     href: string
 }
-import Block from '../../../vendor/Block';
-import '../../../vendor/templator/index.js';
-import template from './Template';
-import * as Mustache from '../../../typings/mustache';
+
 
 class httpError extends Block {
     constructor(props: Prop) {

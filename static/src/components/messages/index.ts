@@ -1,3 +1,8 @@
+import Block from '../../../vendor/block/index.js'
+import '../../../vendor/templator/index.js';
+import template from './template.js';
+import * as Mustache from '../../../typings/mustache';
+
 interface Props{
     messages: Array<Prop>
 }
@@ -10,10 +15,7 @@ type Prop = {
     src?: string
 }
 
-import Block from '../../../vendor/block/index'
-import '../../../vendor/templator/index';
-import template from './template';
-import * as Mustache from '../../../typings/mustache';
+
 
 class Messages extends Block {
     constructor(props: Props) {

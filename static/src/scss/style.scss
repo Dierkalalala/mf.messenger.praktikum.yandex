@@ -14,7 +14,9 @@ body {
 .d-flex {
   display: flex;
 }
-
+.default-link{
+  cursor: pointer;
+}
 .auth-form-wrapper {
   max-width: 340px;
   width: 340px;

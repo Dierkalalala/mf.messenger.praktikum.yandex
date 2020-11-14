@@ -33,12 +33,23 @@ body {
   text-align: center;
   color: #1E1E1E;
 }
-
+.default-button{
+  cursor: pointer;
+}
+.hidden{
+  display: none;
+}
+.profile-link{
+  margin-top: 20px;
+}
 .page-center {
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+}
+.add-user-input-wrapper{
+  margin-bottom: 20px;
 }
 
 .auth-form-wrapper label {

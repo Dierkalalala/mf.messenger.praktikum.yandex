@@ -1,8 +1,12 @@
-let template: string = `
+let template : string = `
     <aside class="sidebar-wrapper">
             <div class="sidebar-header">
+                <form class="js-create-new-chat">
+                    <input type="text" name="title">
+                    <button type="submit">Создать новый чат</button>
+                </form>
                 <div class="profile-link-wrapper">
-                    <a href="#" class="profile-link">
+                    <a href="/profile" class="profile-link">
                         Профиль
                         <svg width="6" height="10">
                             <use xlink:href="#chevron-left_icon"></use>
@@ -26,13 +30,14 @@ let template: string = `
             <ul class="sidebar-content">
                 {{#chats}}
                     <li class="sidebar-chat-wrap">
-                    <div class="d-flex sidebar-chat">
+                    <a href="/open-chat" data-chat-id="{{id}}">
+                        <div class="d-flex sidebar-chat">
                         <div class="sidebar-chat-img">
                             <img src="{{profile_img}}" alt="{{name}}">
                         </div>
                         <div class="sidebar-chat-textbox">
                             <h2 class="sidebar-chat-sender">
-                                {{name}}
+                                {{title}}
                             </h2>
                             <span class="sidebar-chat-message">
                                     <b>Вы: </b> стикер
@@ -49,10 +54,11 @@ let template: string = `
                             {{/unreadMessages}}    
                         </div>
                     </div>
+                    </a>
                 </li>
                  {{/chats}}
                 
             </ul>
         </aside>
-`
-export default template
+`;
+export default template;

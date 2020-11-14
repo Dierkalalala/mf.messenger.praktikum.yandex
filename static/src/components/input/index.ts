@@ -1,10 +1,12 @@
+
+import Block from '../../../vendor/block/index.js'
+import '../../../vendor/templator/index.js';
+import template from './template.js';
+import * as Mustache from '../../../typings/mustache';
 interface Prop {
     items?: { [key: string]: unknown }
 }
-import Block from '../../../vendor/block/index'
-import '../../../vendor/templator/index';
-import template from './template';
-import * as Mustache from '../../../typings/mustache';
+
 
 class Input extends Block {
     constructor(props: Prop) {

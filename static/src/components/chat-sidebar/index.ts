@@ -1,17 +1,14 @@
-interface Prop {
-    chats: Array<{
-        name: string,
-        time: string,
-        unreadMessages: number,
-        profile_img: string,
-        is_last_message_your: boolean,
-        lastMessage: string
-    }>
-}
-import Block from '../../../vendor/block/index'
-import '../../../vendor/templator/index';
-import template from './template';
+import Block from '../../../vendor/block/index.js'
+import '../../../vendor/templator/index.js';
+import template from './template.js';
 import * as Mustache from '../../../typings/mustache';
+
+
+interface Prop {
+    [items: string] : unknown
+}
+
+
 
 class ChatSidebar extends Block {
     constructor(props: Prop) {

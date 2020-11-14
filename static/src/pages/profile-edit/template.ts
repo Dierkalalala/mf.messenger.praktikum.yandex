@@ -1,4 +1,4 @@
-let pageTemplate: string = `
+let pageTemplate : string= `
         <div class="page-center">
         {{{ components.sidebar }}}
     <main class="personal-account-wrapper">
@@ -68,5 +68,6 @@ let pageTemplate: string = `
         </form>
     </main>
 </div>
-    `
-export default pageTemplate
+    `;
+export default pageTemplate;
+//# sourceMappingURL=template.js.map

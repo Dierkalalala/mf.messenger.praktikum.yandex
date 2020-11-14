@@ -9,13 +9,22 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.0.1",
-    "mustache": "^4.0.1"
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
+    "@babel/preset-typescript": "^7.12.1",
+    "@babel/register": "^7.12.1",
+    "@types/chai": "^4.2.14",
+    "@types/mocha": "^5.2.7",
+    "chai": "^4.2.0",
+    "mocha": "latest",
+    "mustache": "^4.0.1",
+    "ts-node": "^9.0.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "./node_modules/.bin/mocha",
     "start": "node server.js",
     "prefix-css": "postcss --use autoprefixer -b 'last versions' static/assets/css/style.css -o static/assets/css/style.css"
-
   },
   "repository": {
     "type": "git",

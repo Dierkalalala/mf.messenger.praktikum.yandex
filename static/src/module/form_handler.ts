@@ -1,15 +1,12 @@
-import Validation from './Validation'
-
-function submitForm(e: Event): void {
-    const hasErrorsBoundFunc: Function = Validation.validateFieldsImmediately.bind(this);
-    const hasErrors: boolean = hasErrorsBoundFunc();
+import Validation from './Validation.js'
+function handleFormValidation(e: Event): FormData | boolean {
+    const hasErrorsBoundFunc: Function = Validation.validateFieldsImmediately.bind(e.target);
+    const hasErrors = hasErrorsBoundFunc();
     e.preventDefault();
     if (!hasErrors) {
-        const formData = new FormData(this);
-        console.log(formData);
+        return new FormData(( e.target as HTMLFormElement) );
     }
-
-
+    return false;
 }
+export default handleFormValidation;
 
-export default submitForm;

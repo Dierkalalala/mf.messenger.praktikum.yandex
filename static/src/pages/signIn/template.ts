@@ -1,4 +1,4 @@
-let pageTemplate:string = `
+let pageTemplate : string = `
         <div class="page-center">
         <div class="auth-form-wrapper">
             <form action="" method="post">
@@ -14,10 +14,13 @@ let pageTemplate:string = `
                         </label>
                     {{/inputs}}
                 </div>
+                <div class="auth-error">
+                {{reason}}
+                </div>
                 <div class="auth-form-buttons-wrapper">
                      {{{ components.button }}}
                     <div class="text-center">
-                        <a href="sign-up.html" class="default-link">
+                        <a href="/sign-up" class="default-link">
                             Нет аккаунта?
                         </a>
                     </div>
@@ -25,5 +28,6 @@ let pageTemplate:string = `
             </form>
         </div>
     </div>
-    `
-export default pageTemplate
+    `;
+export default pageTemplate;
+//# sourceMappingURL=template.js.map

@@ -1,12 +1,17 @@
 interface Prop {
-    [items: string] : { [key: string]: unknown }
+    [items: string] : unknown
 }
+
+
 interface ProxyConstructor {
     revocable<T extends object>(target: T, handler: ProxyHandler<T>): { proxy: T; revoke: () => void; };
     new <T extends object>(target: T, handler: ProxyHandler<T>): T;
 }
 declare var Proxy: ProxyConstructor;
-import EventBus from '../eventbus/index';
+
+import EventBus from '../eventbus/index.js';
+
+
 class Block {
     props: Prop;
     eventBus: EventBus
@@ -97,16 +102,24 @@ class Block {
 
     _render() {
         const block = this.render();
-        // Этот небезопасный метод для упрощения логики
-        // Используйте шаблонизатор из npm или напишите свой безопасный
-        // Нужно не в строку компилировать (или делать это правильно),
-        // либо сразу в DOM-элементы возвращать из compile DOM-ноду
-        // @ts-ignore
-        this._element.innerHTML = block;
+        let divElement = document.createElement('div') as HTMLElement;
+        this._element.innerHTML = '';
+        divElement.innerHTML =  block;
+
+
+        this._element.appendChild(divElement);
+
+        return this._element;
+    }
+
+    renderTo(root: HTMLElement):void {
+        void root;
     }
 
     // Может переопределять пользователь, необязательно трогать
-    render() {}
+    render(): string {
+        return '123';
+    }
 
     getContent() {
         return this.element;

@@ -1,4 +1,4 @@
-let template:string = `
+let template : string = `
     <aside class="profile-sidebar sidebar-wrapper">
         <button type="submit" class="submit-message get-back-button">
             <a href="{{href}}">
@@ -9,5 +9,5 @@ let template:string = `
         </button>
     </aside>
     
-`
+`;
 export default template;

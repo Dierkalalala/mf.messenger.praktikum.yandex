@@ -1,36 +1,44 @@
 class ModalTrigger {
-    modalOverLay: HTMLElement;
-    buttons : HTMLElement[];
-    closeButtons: HTMLElement[];
-    constructor(modalButtons: HTMLElement[]) {
-        this.modalOverLay = document.querySelector('.modal-overlay') as HTMLElement;
-        this.buttons = Array.from(modalButtons)
-        this.buttons.forEach((button : HTMLElement) => {
-            button.addEventListener('click', this.activateModal.bind(this, button));
-        })
-        this.closeButtons = Array.from(document.querySelectorAll('[data-js-modal-close]'));
-        this.closeButtons.forEach(close => {
-            close.addEventListener('click', this.closeModal.bind(this));
-        })
+    modalOverLay: HTMLElement
+    constructor() {
+
+        document.addEventListener('click', this.activateModal.bind(this));
+        document.addEventListener('click', this.closeModal.bind(this));
+
 
     }
 
-    activateModal(button : HTMLElement) {
+    activateModal(e: Event) {
+        this.modalOverLay = document.querySelector('.modal-overlay') as HTMLElement;
+        let path = e.composedPath();
+        path.pop();
+        path.pop()
+        let button = Array.from(path).find(el => {
+            return ( el as HTMLElement).matches('[data-modal-id]');
+        }) as HTMLElement
         if (button) {
             let modalId = button.getAttribute('data-modal-id') as string;
-            let modal: HTMLElement = document.querySelector(modalId) as HTMLElement;
+            let modal = document.querySelector(modalId) as HTMLElement;
             this.modalOverLay.classList.add('active');
             modal.classList.add('active');
         }
-
-
     }
 
-    closeModal() {
-        this.modalOverLay.classList.remove('active');
-        Array.from(this.modalOverLay.children).forEach((modal: HTMLElement) => {
-            modal.classList.remove('active')
+    closeModal(e: Event) {
+        this.modalOverLay = document.querySelector('.modal-overlay') as HTMLElement;
+        let path = e.composedPath();
+        path.pop();
+        path.pop()
+        let button = Array.from(path).find(el => {
+            return (el as HTMLElement).matches('[data-js-modal-close]');
         })
+        if (button) {
+            this.modalOverLay.classList.remove('active');
+            Array.from(this.modalOverLay.children).forEach((modal) => {
+                modal.classList.remove('active');
+            });
+        }
     }
 }
-export default ModalTrigger
+
+export default ModalTrigger;

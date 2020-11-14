@@ -14,6 +14,8 @@ let pageTemplate : string = `
                         </label>
                     {{/inputs}}
                 </div>
+                <div class="auth-error">{{reason}}</div>
+                
                 <div class="auth-form-buttons-wrapper">
                      {{{ components.button }}}
                     <div class="text-center">
@@ -25,5 +27,5 @@ let pageTemplate : string = `
             </form>
         </div>
     </div>
-    `
-export default pageTemplate
+    `;
+export default pageTemplate;

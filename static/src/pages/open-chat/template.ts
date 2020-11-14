@@ -1,4 +1,4 @@
-let pageTemplate: string = `
+let pageTemplate : string = `
         <div class="page-wrapper">
     <div class="d-flex messenger-main-page">
         {{{components.sidebar}}}
@@ -18,7 +18,7 @@ let pageTemplate: string = `
                                 </div>
                             </div>
                         </div>
-                        <a class="chat-messages-drop" href="#">
+                        <a class="chat-messages-drop">
                             <svg width="3" height="16">
                                 <use xlink:href="#menu_icon"></use>
                             </svg>
@@ -31,6 +31,16 @@ let pageTemplate: string = `
                                             </svg>
                                             <span>
                                                 Переименовать
+                                            </span>
+                                        </button>
+                                    </li>
+                                     <li>
+                                        <button type="button" data-modal-id="#add-user" class="js-modal-trigger js-remove-chat chat-messages-drop-link">
+                                            <svg width="22" height="22">
+                                                <use xlink:href="#delete_icon"></use>
+                                            </svg>
+                                            <span>
+                                                Добавить пользователя
                                             </span>
                                         </button>
                                     </li>
@@ -48,6 +58,28 @@ let pageTemplate: string = `
                             </div>
                         </a>
                     </header>
+                    <div>
+                        <ul class="chat-users">
+                            {{#data.chatUsers}}
+                                <li class="sidebar-chat-wrap">
+                                        <div class="d-flex sidebar-chat">
+                                            <div class="sidebar-chat-img">
+                                                <img src="{{avatar}}" alt="{{name}}">
+                                            </div>
+                                            <div class="sidebar-chat-textbox">
+                                                <h2 class="sidebar-chat-sender">
+                                                    {{display_name}}
+                                                </h2>
+                                                <h3 >
+                                                {{role}}
+                                                </h3>
+                                            </div>
+                                        </div>
+                                        <button data-id="{{id}}" type="button" class="js-delete-user">Удалить</button>
+                                </li>
+                             {{/data.chatUsers}}
+                        </ul>
+                    </div>
                     <div class="chat-messages-body">
                         <div class="chat-messages-body-wrapper">
 
@@ -131,7 +163,26 @@ let pageTemplate: string = `
                     </button>
                 </div>
             </div>
+            <div id="add-user" class="modal-chat-delete modal">
+               <form id="add-user-form">
+                    <div class="modal-title">
+                        Вы хотите добавить пользователя?
+                    </div>
+                    <div class="add-user-input-wrapper">
+                        <input type="text" name="user_id" placeholder="Введите id пользователя">
+                    </div>
+                    <div class="modal-buttons-row d-flex">
+                        <button type="submit" class="default-button">
+                           Добавить
+                        </button>
+                        <button data-js-modal-close class="btn-gray default-button">
+                            Отменить
+                        </button>
+                    </div>
+                </form>
+            </div>
+            
         </div>
 </div>
-    `
-export default pageTemplate
+    `;
+export default pageTemplate;

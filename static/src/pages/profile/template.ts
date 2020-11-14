@@ -1,4 +1,4 @@
-let pageTemplate :string = `
+let pageTemplate : string = `
         <div class="page-center">
         {{{ components.sidebar }}}
     <main class="personal-account-wrapper">
@@ -34,17 +34,18 @@ let pageTemplate :string = `
         </div>
         <div class="personal-data personal-data-change">
             <div class="personal-data-links">
-                <a href="profile-edit.html" class="default-link">
+                <a href="/profile/edit" class="default-link">
                     Изменить данные
                 </a>
 
-                <a href="#" class="default-link red-colored">
+                <div class="default-link red-colored js-sign-out">
                     Выйти
-                </a>
+                </div>
             </div>
 
         </div>
     </main>
 </div>
-    `
-export default pageTemplate
+    `;
+export default pageTemplate;
+//# sourceMappingURL=template.js.map
