@@ -1,5 +1,5 @@
-import BaseApi from './baseApi.js';
-import { ChatsApi } from './httpTransport.js';
+import BaseApi from './baseApi';
+import { ChatsApi } from './httpTransport';
 const headers = {
     "Content-type": "application/json"
 };

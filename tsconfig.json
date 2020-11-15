@@ -14,8 +14,10 @@
     "lib": ["es2017", "dom"]
   },
   "include": [
-    "**/*",
+    "static/**/*",
     "static/typings/**/*",
+  ],
+  "exclude": [
     "test/index.spec.ts"
   ]
 }

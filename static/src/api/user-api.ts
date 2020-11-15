@@ -1,7 +1,7 @@
 "use strict";
 
-import BaseApi from './baseApi.js';
-import {UserApi} from './httpTransport.js'
+import BaseApi from './baseApi';
+import {UserApi} from './httpTransport'
 
 const headers = {
     "Content-type": "application/json"

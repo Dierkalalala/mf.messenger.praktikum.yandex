@@ -1,5 +1,5 @@
-import BaseApi from './baseApi.js';
-import { AuthApi } from './httpTransport.js';
+import BaseApi from './baseApi';
+import { AuthApi } from './httpTransport';
 const headers = {
     "Content-type": "application/json"
 };

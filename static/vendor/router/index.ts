@@ -1,11 +1,12 @@
-import Block from '../block/index.js'
-import Route from '../route/index.js';
+import Block from '../block/index'
+import Route from '../route/index';
+
 
 
 class Router {
     routes: Route[]
     history: History;
-    _currentRoute: unknown;
+    _currentRoute: Route | null;
     _rootQuery: string;
     private static __instance: Router;
 
@@ -30,15 +31,17 @@ class Router {
 
     start() {
         window.onpopstate = ((event: PopStateEvent) => {
-            this._onRoute(event.currentTarget.location.pathname)
-        }).bind(this);
-        this._onRoute((document.location as Location).pathname);
+            let currentTarget : HTMLDocument = event.currentTarget as HTMLDocument;
+            let location = currentTarget.location!.pathname;
+            this._onRoute(location)
+        });
+        this._onRoute(document.location!.pathname);
     }
 
     _onRoute(pathname: string) {
         const route = this.getRoute(pathname);
 
-        if (this._currentRoute !== null && (this._currentRoute as Route)._pathname !== pathname) {
+        if ( this._currentRoute && this._currentRoute._pathname !== pathname) {
             (this._currentRoute as Route).leave();
         }
         if (route === undefined) {
@@ -51,8 +54,11 @@ class Router {
     }
 
     go(pathname: string) {
-        this.history.pushState( (this._currentRoute as Route)._pathname, pathname, pathname);
-        this._onRoute(pathname);
+        if (this._currentRoute !== null) {
+            this.history.pushState( this._currentRoute._pathname, pathname, pathname);
+            this._onRoute(pathname);
+        }
+
     }
 
     back() {

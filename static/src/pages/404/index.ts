@@ -1,5 +1,5 @@
-import '../../../vendor/templator/index.js';
-import Error from '../../components/httpError/Index.js';
+
+import Error from '../../components/httpError/Index';
 
 interface Prop {
     code: number,

@@ -13,7 +13,7 @@ interface ValidatorsType {
 
 type ValidationK = keyof ValidatorsType
 
-import MailRegExp from './MailRegExp.js'
+import MailRegExp from './MailRegExp'
 
 const ValidationMethods = {
 

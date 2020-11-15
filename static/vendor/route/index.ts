@@ -1,4 +1,5 @@
-import Block from '../block/index.js'
+import Block from '../block/'
+import LogInPage from '../../src/pages/signIn/'
 
 
 interface Prop {
@@ -10,8 +11,11 @@ function isEqual(lhs : string , rhs : string) {
 }
 
 class Route{
-
-
+    _pathname: string;
+    _blockClass: Block;
+    _block: LogInPage | null;
+    _props: Prop;
+    __root: HTMLElement
     constructor(pathname : string, view: Block, props: Prop) {
         this._pathname = pathname;
         this._blockClass = view;
@@ -40,11 +44,11 @@ class Route{
     render() {
         if (!this._block) {
             this._block = new this._blockClass();
-            (this._block as Block).renderTo(this.__root);
+            this._block!.renderTo(this.__root);
             return;
         }
 
-        (this._block as Block).show();
+        this._block.show();
     }
 }
 export default Route

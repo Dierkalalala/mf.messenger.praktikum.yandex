@@ -1,13 +1,12 @@
-import '../../../vendor/templator/index.js';
-import Button from '../../components/button/index.js';
-import Block from '../../../vendor/block/index.js'
-import Validation from '../../../src/module/Validation.js'
-import submitForm from '../../../src/module/form_handler.js';
-import pageTemplate from './template.js';
-import * as Mustache from '../../../typings/mustache';
-import AuthApiClass from "../../api/auth-api.js";
-import Router from "../../../vendor/router/index.js";
-import checkForAuth from '../../../src/module/isAuth.js'
+
+import Button from '../../components/button/index';
+import Block from '../../../vendor/block/index'
+import Validation from '../../../src/module/Validation'
+import submitForm from '../../../src/module/form_handler';
+import pageTemplate from './template';
+import AuthApiClass from "../../api/auth-api";
+import Router from "../../../vendor/router/index";
+import checkForAuth from '../../../src/module/isAuth'
 
 const router = new Router('.app');
 

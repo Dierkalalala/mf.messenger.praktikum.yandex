@@ -1,15 +1,14 @@
-import '../../../vendor/templator/index.js';
-import state from "../../../vendor/state/index.js";
-import Sidebar from '../../components/sidebar/index.js';
 
-import pageTemplate from './template.js';
+import state from "../../../vendor/state/index";
+import Sidebar from '../../components/sidebar/index';
 
-import * as Mustache from '../../../typings/mustache';
+import pageTemplate from './template';
 
-import Block from "../../../vendor/block/index.js";
-import Router from "../../../vendor/router/index.js";
-import AuthApiClass from "../../../src/api/auth-api.js";
-import checkForAuth from "../../module/isAuth.js";
+
+import Block from "../../../vendor/block/index";
+import Router from "../../../vendor/router/index";
+import AuthApiClass from "../../../src/api/auth-api";
+import checkForAuth from "../../module/isAuth";
 
 const router = new Router('.app') as Router
 
@@ -117,7 +116,7 @@ class ProfilePage extends Block {
                     ProfilePage.profilePageElement.style.display = 'block';
                 }
 
-                let signOutButton = document.querySelector('.js-sign-out') as HTMLElement;
+                let signOutButton = document.querySelector('-sign-out') as HTMLElement;
 
                 signOutButton.addEventListener('click', signOut.bind(this));
 

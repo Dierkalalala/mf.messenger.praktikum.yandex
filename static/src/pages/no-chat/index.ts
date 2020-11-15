@@ -1,12 +1,11 @@
-import '../../../vendor/templator/index.js';
-import Block from '../../../vendor/block/index.js'
-import ChatSidebar from '../../components/chat-sidebar/index.js';
-import pageTemplate from './template.js';
-import * as Mustache from '../../../typings/mustache';
-import Sidebar from "../../components/sidebar/index.js";
-import store from "../../../vendor/state/index.js";
-import chatsApiHandler from '../../api/chats-api.js';
-import Router from "../../../vendor/router/index.js";
+
+import Block from '../../../vendor/block/index'
+import ChatSidebar from '../../components/chat-sidebar/index';
+import pageTemplate from './template';
+import Sidebar from "../../components/sidebar/index";
+import store from "../../../vendor/state/index";
+import chatsApiHandler from '../../api/chats-api';
+import Router from "../../../vendor/router/index";
 
 let router = new Router('.app');
 
@@ -68,7 +67,7 @@ class noChatPage extends Block {
 
                 rootElement.appendChild(noChatPage.noChatPageElement);
 
-                let createNewChatButton = document.querySelector('.js-create-new-chat') as HTMLElement;
+                let createNewChatButton = document.querySelector('-create-new-chat') as HTMLElement;
 
                 createNewChatButton.addEventListener('submit', (e: Event) => {
                     e.preventDefault();

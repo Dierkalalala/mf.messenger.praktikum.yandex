@@ -1,7 +1,5 @@
-import Block from '../../../vendor/Block/index.js';
-import '../../../vendor/templator/index.js';
-import template from './Template.js';
-import * as Mustache from '../../../typings/mustache';
+import Block from '../../../vendor/Block/index';
+import template from './Template';
 
 interface Prop {
     code: number,

@@ -1,7 +1,7 @@
-import ProfilePage from '../../src/pages/profile/index.js';
-import noChat from '../../src/pages/open-chat/index.js';
-import openChat from '../../src/pages/no-chat/index.js';
-import ProfileEditPage from "../../src/pages/profile-edit/index.js";
+import ProfilePage from '../../src/pages/profile/index';
+import noChat from '../../src/pages/open-chat/index';
+import openChat from '../../src/pages/no-chat/index';
+import ProfileEditPage from "../../src/pages/profile-edit/index";
 
 
 type Iterable = {

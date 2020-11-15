@@ -1,3 +1,4 @@
+import EventBus from '../eventbus/index';
 interface Prop {
     [items: string] : unknown
 }
@@ -9,12 +10,13 @@ interface ProxyConstructor {
 }
 declare var Proxy: ProxyConstructor;
 
-import EventBus from '../eventbus/index.js';
+
 
 
 class Block {
     props: Prop;
     eventBus: EventBus
+
     static EVENTS = {
         INIT: "init",
         FLOW_CDM: "flow:component-did-mount",
@@ -27,7 +29,6 @@ class Block {
         tagName: string,
         props: Prop
     };
-
     /** JSDoc
      * @param {string} tagName
      * @param {Object} props
@@ -48,6 +49,8 @@ class Block {
         this._registerEvents(eventBus);
         eventBus.emit(Block.EVENTS.INIT);
     }
+
+
 
     _registerEvents(eventBus: EventBus) {
         eventBus.on(Block.EVENTS.INIT, this.init.bind(this));

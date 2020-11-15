@@ -1,5 +1,5 @@
 type DataParams = {
-    [key: string]: unknown;
+    [key: string]: string | number | object;
 }
 
 type HTTPOptions = {
@@ -17,16 +17,20 @@ const METHODS = {
 };
 
 function queryStringify(data: DataParams) {
-    return Object.keys(data).reduce((acc, res) => {
-        return acc + `${res}=${(data[res] as object).toString()}&`
+    return Object.entries(data).reduce((acc, res) => {
+        let keyName = res[0];
+        let keyValue = res[1];
+        return acc + `${keyName}=${keyValue.toString()}&`
     }, '?')
 }
-function convert(str){
-    return str.replace(/&quot;/g,'"')
-        .replace(/&gt;/g,'>')
-        .replace(/&lt;/g,'<')
-        .replace(/&amp;/g,'&')
+
+function convert(str: string) {
+    return str.replace(/&quot;/g, '"')
+        .replace(/&gt;/g, '>')
+        .replace(/&lt;/g, '<')
+        .replace(/&amp;/g, '&')
 }
+
 class HTTPTransport {
     prefix: string;
     baseUrl = 'https://ya-praktikum.tech/api/v2';
@@ -64,12 +68,8 @@ class HTTPTransport {
 
 
             if (method == METHODS.GET) {
-                try {
-                    url += queryStringify((options.data as JSON))
-                    url = url.substr(0, url.length - 1)
-                } catch (e) {
-                    void e
-                }
+                url += queryStringify((options.data as DataParams))
+                url = url.substr(0, url.length - 1)
             }
 
 
@@ -77,8 +77,10 @@ class HTTPTransport {
 
 
             if (headers) {
-                Object.keys(headers).forEach(header => {
-                    xhr.setRequestHeader(header, ((headers as DataParams)[header] as string))
+                Object.entries(headers).forEach(header => {
+                    let headerKey = header[0];
+                    let headerValue = header[1] as string
+                    xhr.setRequestHeader(headerKey, headerValue)
                 })
             }
 
@@ -96,7 +98,7 @@ class HTTPTransport {
             xhr.onerror = reject;
             xhr.ontimeout = reject;
 
-            for (let key in (data as object)  ) {
+            for (let key in (data as DataParams) ) {
                 if (typeof data[key] === 'string' || typeof data[key] === 'number') {
                     data[key] = convert(data[key]);
                 }

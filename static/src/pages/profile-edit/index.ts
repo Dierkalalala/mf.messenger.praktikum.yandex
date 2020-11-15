@@ -1,15 +1,14 @@
-import '../../../vendor/templator/index.js';
-import Sidebar from '../../components/sidebar/index.js';
-import Button from '../../components/button/index.js';
-import pageTemplate from './template.js'
-import Validation from '../../../src/module/Validation.js'
-import submitForm from '../../../src/module/form_handler.js';
-import * as Mustache from '../../../typings/mustache';
-import Block from "../../../vendor/block/index.js";
-import UserApiClass from "../../api/user-api.js";
-import store from "../../../vendor/state/index.js";
-import isAuth from '../../module/isAuth.js'
-import Router from '../../../vendor/router/index.js'
+
+import Sidebar from '../../components/sidebar/index';
+import Button from '../../components/button/index';
+import pageTemplate from './template'
+import Validation from '../../../src/module/Validation'
+import submitForm from '../../../src/module/form_handler';
+import Block from "../../../vendor/block/index";
+import UserApiClass from "../../api/user-api";
+import store from "../../../vendor/state/index";
+import isAuth from '../../module/isAuth'
+import Router from '../../../vendor/router/index'
 
 let router = new Router('.app')
 

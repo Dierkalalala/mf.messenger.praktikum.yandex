@@ -1,13 +1,11 @@
 // import MessagesBlockClass from '../../components/messages/index';
-import '../../../vendor/templator/index.js';
-import Block from '../../../vendor/block/index.js'
-import ChatSidebar from '../../components/chat-sidebar/index.js';
-import pageTemplate from './template.js';
-import * as Mustache from '../../../typings/mustache';
+import Block from '../../../vendor/block/index'
+import ChatSidebar from '../../components/chat-sidebar/index';
+import pageTemplate from './template';
 // import Sidebar from "../../components/sidebar";
-import store from "../../../vendor/state/index.js";
-import Router from "../../../vendor/router/index.js";
-import chatsApiHandler from "../../api/chats-api.js";
+import store from "../../../vendor/state/index";
+import Router from "../../../vendor/router/index";
+import chatsApiHandler from "../../api/chats-api";
 // import messages from '../../components/messages/index'
 let router = new Router('.app');
 
@@ -161,7 +159,7 @@ class openChatPage extends Block {
 
                 rootElement.appendChild(openChatPage.openChatPageElement);
 
-                let createNewChatButton = document.querySelector('.js-create-new-chat') as HTMLElement;
+                let createNewChatButton = document.querySelector('-create-new-chat') as HTMLElement;
 
                 createNewChatButton.addEventListener('submit', (e) => {
                     e.preventDefault();
@@ -200,7 +198,7 @@ class openChatPage extends Block {
                     }
 
                     let deleteButton = Array.from(path).find(el => {
-                        return (el as HTMLElement).matches('.js-delete-user')
+                        return (el as HTMLElement).matches('-delete-user')
                     })
 
                     if (deleteButton){

@@ -4,11 +4,12 @@
   "description": "Project for yandex middle front end developer course. Messenger",
   "main": "server.js",
   "dependencies": {
+    "babel-plugin-replace-ts-export-assignment": "0.0.2",
     "express": "^4.17.1",
-    "postcss": "^8.1.4"
+    "postcss": "^8.1.4",
+    "webpack": "^5.4.0"
   },
   "devDependencies": {
-    "autoprefixer": "^10.0.1",
     "@babel/cli": "^7.12.1",
     "@babel/core": "^7.12.3",
     "@babel/preset-env": "^7.12.1",
@@ -16,15 +17,21 @@
     "@babel/register": "^7.12.1",
     "@types/chai": "^4.2.14",
     "@types/mocha": "^5.2.7",
+    "autoprefixer": "^10.0.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "chai": "^4.2.0",
     "mocha": "latest",
     "mustache": "^4.0.1",
-    "ts-node": "^9.0.0"
+    "ts-loader": "^8.0.11",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.5",
+    "webpack-cli": "^4.2.0"
   },
   "scripts": {
     "test": "./node_modules/.bin/mocha",
     "start": "node server.js",
-    "prefix-css": "postcss --use autoprefixer -b 'last versions' static/assets/css/style.css -o static/assets/css/style.css"
+    "prefix-css": "postcss --use autoprefixer -b 'last versions' static/assets/css/style.css -o static/assets/css/style.css",
+    "build": "babel ./static --out-dir ./static/dist --extensions .ts,.tsx"
   },
   "repository": {
     "type": "git",
