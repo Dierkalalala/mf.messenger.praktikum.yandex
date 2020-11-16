@@ -31,7 +31,7 @@
     "test": "./node_modules/.bin/mocha",
     "start": "node server.js",
     "prefix-css": "postcss --use autoprefixer -b 'last versions' static/assets/css/style.css -o static/assets/css/style.css",
-    "build": "babel ./static --out-dir ./static/dist --extensions .ts,.tsx"
+    "build": "babel ./static --out-dir ./static/dist --extensions .ts,.tsx && webpack"
   },
   "repository": {
     "type": "git",

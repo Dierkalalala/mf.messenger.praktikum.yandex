@@ -24,12 +24,12 @@ function queryStringify(data: DataParams) {
     }, '?')
 }
 
-function convert(str: string) {
+/*function convert(str: string) {
     return str.replace(/&quot;/g, '"')
         .replace(/&gt;/g, '>')
         .replace(/&lt;/g, '<')
         .replace(/&amp;/g, '&')
-}
+}*/
 
 class HTTPTransport {
     prefix: string;
@@ -68,8 +68,10 @@ class HTTPTransport {
 
 
             if (method == METHODS.GET) {
-                url += queryStringify((options.data as DataParams))
-                url = url.substr(0, url.length - 1)
+                if (options.data !== undefined) {
+                    url += queryStringify((options.data as DataParams))
+                    url = url.substr(0, url.length - 1)
+                }
             }
 
 
@@ -98,11 +100,11 @@ class HTTPTransport {
             xhr.onerror = reject;
             xhr.ontimeout = reject;
 
-            for (let key in (data as DataParams) ) {
+            /*for (let key in (data as DataParams) ) {
                 if (typeof data[key] === 'string' || typeof data[key] === 'number') {
                     data[key] = convert(data[key]);
                 }
-            }
+            }*/
 
             if (method == METHODS.GET || !data) {
                 xhr.send();

@@ -1,65 +1,9 @@
-let template = `
-    <aside class="sidebar-wrapper">
-            <div class="sidebar-header">
-                <form class="js-create-new-chat">
-                    <input type="text" name="title">
-                    <button type="submit">Создать новый чат</button>
-                </form>
-                <div class="profile-link-wrapper">
-                    <a href="/profile" class="profile-link">
-                        Профиль
-                        <svg width="6" height="10">
-                            <use xlink:href="#chevron-left_icon"></use>
-                        </svg>
-                    </a>
-                </div>
-                <div class="sidebar-header-search-form">
-                    <form action="">
-                        <label>
-                            <input type="text" class="js-input-control">
-                            <span class="d-flex search-form-placeholder-wrapper align-items-center justify-content-center">
-                                    <svg width="20" height="20">
-                                        <use xlink:href="#search_icon"></use>
-                                    </svg>
-                                    <span class="search-form-placeholder">Поиск</span>
-                                </span>
-                        </label>
-                    </form>
-                </div>
-            </div>
-            <ul class="sidebar-content">
-                {{#chats}}
-                    <li class="sidebar-chat-wrap">
-                    <a href="/open-chat" data-chat-id="{{id}}">
-                        <div class="d-flex sidebar-chat">
-                        <div class="sidebar-chat-img">
-                            <img src="{{profile_img}}" alt="{{name}}">
-                        </div>
-                        <div class="sidebar-chat-textbox">
-                            <h2 class="sidebar-chat-sender">
-                                {{title}}
-                            </h2>
-                            <span class="sidebar-chat-message">
-                                    <b>Вы: </b> стикер
-                                </span>
-                        </div>
-                        <div class="sidebar-chat-additional-data">
-                            <time class="sidebar-chat-time">
-                                {{time}}
-                            </time>
-                            {{#unreadMessages}}
-                                <div class="sidebar-chat-new-messages">
-                                    {{unreadMessages}}
-                                </div>
-                            {{/unreadMessages}}    
-                        </div>
-                    </div>
-                    </a>
-                </li>
-                 {{/chats}}
-                
-            </ul>
-        </aside>
-`;
-export default template;
-//# sourceMappingURL=template.js.map
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+var template = "\n    <aside class=\"sidebar-wrapper\">\n            <div class=\"sidebar-header\">\n                <form class=\"js-create-new-chat\">\n                    <input type=\"text\" name=\"title\">\n                    <button type=\"submit\">\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u043D\u043E\u0432\u044B\u0439 \u0447\u0430\u0442</button>\n                </form>\n                <div class=\"profile-link-wrapper\">\n                    <a href=\"/profile\" class=\"profile-link\">\n                        \u041F\u0440\u043E\u0444\u0438\u043B\u044C\n                        <svg width=\"6\" height=\"10\">\n                            <use xlink:href=\"#chevron-left_icon\"></use>\n                        </svg>\n                    </a>\n                </div>\n                <div class=\"sidebar-header-search-form\">\n                    <form action=\"\">\n                        <label>\n                            <input type=\"text\" class=\"js-input-control\">\n                            <span class=\"d-flex search-form-placeholder-wrapper align-items-center justify-content-center\">\n                                    <svg width=\"20\" height=\"20\">\n                                        <use xlink:href=\"#search_icon\"></use>\n                                    </svg>\n                                    <span class=\"search-form-placeholder\">\u041F\u043E\u0438\u0441\u043A</span>\n                                </span>\n                        </label>\n                    </form>\n                </div>\n            </div>\n            <ul class=\"sidebar-content\">\n                {{#chats}}\n                    <li class=\"sidebar-chat-wrap\">\n                    <a href=\"/open-chat\" data-chat-id=\"{{id}}\">\n                        <div class=\"d-flex sidebar-chat\">\n                        <div class=\"sidebar-chat-img\">\n                            <img src=\"{{profile_img}}\" alt=\"{{name}}\">\n                        </div>\n                        <div class=\"sidebar-chat-textbox\">\n                            <h2 class=\"sidebar-chat-sender\">\n                                {{title}}\n                            </h2>\n                            <span class=\"sidebar-chat-message\">\n                                    <b>\u0412\u044B: </b> \u0441\u0442\u0438\u043A\u0435\u0440\n                                </span>\n                        </div>\n                        <div class=\"sidebar-chat-additional-data\">\n                            <time class=\"sidebar-chat-time\">\n                                {{time}}\n                            </time>\n                            {{#unreadMessages}}\n                                <div class=\"sidebar-chat-new-messages\">\n                                    {{unreadMessages}}\n                                </div>\n                            {{/unreadMessages}}    \n                        </div>\n                    </div>\n                    </a>\n                </li>\n                 {{/chats}}\n                \n            </ul>\n        </aside>\n";
+var _default = template;
+exports["default"] = _default;

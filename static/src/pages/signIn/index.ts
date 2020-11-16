@@ -6,6 +6,7 @@ import Validation from '../../../src/module/Validation'
 import submitForm from '../../../src/module/form_handler';
 import AuthApiClass from '../../api/auth-api';
 import isAuth from '../../../src/module/isAuth'
+import Placeholder from '../../../src/module/placeholder'
 // import Router from "../../../vendor/router/index";
 // let router = new Router('.app')
 
@@ -22,8 +23,8 @@ class signInPage extends Block {
     inputs: Inputs;
     rootElement: HTMLElement;
 
-    constructor(props : Prop) {
-        super('div', props);
+    constructor() {
+        super('div');
         isAuth('/profile');
 
         this.button = new Button({
@@ -72,6 +73,8 @@ class signInPage extends Block {
         this._fetchData();
         rootElement.appendChild(this._render());
         Validation.validate(this.inputs);
+        let inputControls = Array.from(document.querySelectorAll('.js-input-control'))
+        new Placeholder(inputControls);
         let forms = document.querySelectorAll('form');
         Array.from(forms).forEach(form => {
             form.addEventListener('submit', (e) => {
@@ -102,4 +105,4 @@ class signInPage extends Block {
 }
 
 
-export default signInPage;
+export default new signInPage();

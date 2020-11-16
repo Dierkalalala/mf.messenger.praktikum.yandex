@@ -1,12 +1,9 @@
-// import MessagesBlockClass from '../../components/messages/index';
 import Block from '../../../vendor/block/index'
 import ChatSidebar from '../../components/chat-sidebar/index';
 import pageTemplate from './template';
-// import Sidebar from "../../components/sidebar";
 import store from "../../../vendor/state/index";
 import Router from "../../../vendor/router/index";
 import chatsApiHandler from "../../api/chats-api";
-// import messages from '../../components/messages/index'
 let router = new Router('.app');
 
 interface Prop {
@@ -16,10 +13,9 @@ interface Prop {
 class openChatPage extends Block {
     private openChatPageElement: HTMLDivElement;
     sidebar: ChatSidebar
-    constructor(props: Prop) {
-        super('div', props);
-        this.checkForActiveChat();
-        this.registerEvents();
+    constructor() {
+        super('div');
+
         this.openChatPageElement = document.createElement('div');
     }
 
@@ -120,12 +116,14 @@ class openChatPage extends Block {
                 }
 
             })
-            .catch(err => {alert(err)});
+            .catch(err => {console.log(err)});
 
 
     }
 
     renderTo(rootElement: HTMLElement) {
+        this.checkForActiveChat();
+        this.registerEvents();
         this._fetchData()
             .then(res => {
                 this.sidebar = new ChatSidebar({
@@ -175,10 +173,10 @@ class openChatPage extends Block {
                                         this.setProps({chats: res.response});
                                         this.registerEvents();
                                     })
-                                    .catch(err => alert(err));
+                                    .catch(err => console.log(err));
                             }
                         })
-                        .catch(err => alert(err));
+                        .catch(err => console.log(err));
                 })
 
                 document.addEventListener('click', (e) => {
@@ -233,5 +231,5 @@ class openChatPage extends Block {
     }
 }
 
-export default openChatPage;
+export default new openChatPage();
 

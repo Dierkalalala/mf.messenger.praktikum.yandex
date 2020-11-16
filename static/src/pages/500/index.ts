@@ -14,21 +14,17 @@ class errorPage extends Error {
 
     }
 
-    _fetchData() {
-        this.props = {
-            code: 500,
-            message: 'Мы уже активно фиксим',
-            link_message: 'Назад к чатам',
-            href: '/no-chat.html',
-        }
-    }
 
     renderTo(rootElement: HTMLElement) {
-        this._fetchData();
 
         rootElement.appendChild(this._render());
     }
 }
 
-export default errorPage;
+export default new errorPage({
+    code: 500,
+    message: 'Мы уже активно фиксим',
+    link_message: 'Назад к чатам',
+    href: '/no-chat.html',
+});
 

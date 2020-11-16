@@ -1,12 +1,26 @@
-import Validation from './Validation.js';
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _Validation = _interopRequireDefault(require("./Validation"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
 function handleFormValidation(e) {
-    const hasErrorsBoundFunc = Validation.validateFieldsImmediately.bind(e.target);
-    const hasErrors = hasErrorsBoundFunc();
-    e.preventDefault();
-    if (!hasErrors) {
-        return new FormData(e.target);
-    }
-    return false;
+  var hasErrorsBoundFunc = _Validation["default"].validateFieldsImmediately.bind(e.target);
+
+  var hasErrors = hasErrorsBoundFunc();
+  e.preventDefault();
+
+  if (!hasErrors) {
+    return new FormData(e.target);
+  }
+
+  return false;
 }
-export default handleFormValidation;
-//# sourceMappingURL=form_handler.js.map
+
+var _default = handleFormValidation;
+exports["default"] = _default;

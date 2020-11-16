@@ -21,7 +21,7 @@ interface Prop {
 
 
 class ProfileEditPage extends Block {
-    rootElement: HTMLElement;
+    rootElement: HTMLElement | null;
     profilePageElement: HTMLElement;
     savePersonalDataButton: Button;
     savePasswordButton: Button;
@@ -29,9 +29,12 @@ class ProfileEditPage extends Block {
 
 
 
-    constructor(props: Prop) {
-        super('div', props);
-        this.rootElement = document.querySelector('.app') as HTMLElement;
+    constructor() {
+        super('div');
+        this.rootElement = document.querySelector('.app');
+        if (this.rootElement === null) {
+            throw new Error('Корневого элемента не существует')
+        }
         this.profilePageElement = document.createElement('div');
         this.registerEvents();
     }
@@ -226,7 +229,7 @@ class ProfileEditPage extends Block {
                                     }
                                 })
                                 .catch(err => {
-                                    alert(err);
+                                    console.log(err);
                                 })
                         }
                     });
@@ -240,7 +243,7 @@ class ProfileEditPage extends Block {
     }
 }
 
-export default ProfileEditPage;
+export default new ProfileEditPage();
 
 
 

@@ -1,34 +1,9 @@
-let pageTemplate = `
-        <div class="page-center">
-        <div class="auth-form-wrapper">
-            <form action="" method="post">
-                <div class="upper-form-block">
-                    <h1 class="form-title">
-                        {{pageTitile}}
-                    </h1>
-                    {{#inputs}}
-                        <label>
-                            <input name="{{name}}" type="{{type}}" class="js-input-control">
-                            <span class="input-placeholder">{{placeholder}}</span>
-                            <span class="input-error"></span>
-                        </label>
-                    {{/inputs}}
-                </div>
-                <div class="auth-error">
-                {{reason}}
-                </div>
-                <div class="auth-form-buttons-wrapper">
-                     {{{ components.button }}}
-                    <div class="text-center">
-                        <a href="/sign-up" class="default-link">
-                            Нет аккаунта?
-                        </a>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-    `;
-export default pageTemplate;
-//# sourceMappingURL=template.js.map
-//# sourceMappingURL=template.js.map
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+var pageTemplate = "\n        <div class=\"page-center\">\n        <div class=\"auth-form-wrapper\">\n            <form action=\"\" method=\"post\">\n                <div class=\"upper-form-block\">\n                    <h1 class=\"form-title\">\n                        {{pageTitile}}\n                    </h1>\n                    {{#inputs}}\n                        <label>\n                            <input name=\"{{name}}\" type=\"{{type}}\" class=\"js-input-control\">\n                            <span class=\"input-placeholder\">{{placeholder}}</span>\n                            <span class=\"input-error\"></span>\n                        </label>\n                    {{/inputs}}\n                </div>\n                <div class=\"auth-error\">\n                {{reason}}\n                </div>\n                <div class=\"auth-form-buttons-wrapper\">\n                     {{{ components.button }}}\n                    <div class=\"text-center\">\n                        <a href=\"/sign-up\" class=\"default-link\">\n                            \u041D\u0435\u0442 \u0430\u043A\u043A\u0430\u0443\u043D\u0442\u0430?\n                        </a>\n                    </div>\n                </div>\n            </form>\n        </div>\n    </div>\n    ";
+var _default = pageTemplate;
+exports["default"] = _default;

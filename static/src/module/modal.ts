@@ -1,11 +1,9 @@
 class ModalTrigger {
     modalOverLay: HTMLElement
-    constructor() {
 
+    constructor() {
         document.addEventListener('click', this.activateModal.bind(this));
         document.addEventListener('click', this.closeModal.bind(this));
-
-
     }
 
     activateModal(e: Event) {
@@ -14,7 +12,7 @@ class ModalTrigger {
         path.pop();
         path.pop()
         let button = Array.from(path).find(el => {
-            return ( el as HTMLElement).matches('[data-modal-id]');
+            return (el as HTMLElement).matches('[data-modal-id]');
         }) as HTMLElement
         if (button) {
             let modalId = button.getAttribute('data-modal-id') as string;

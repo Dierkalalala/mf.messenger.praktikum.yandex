@@ -15,7 +15,6 @@
   },
   "include": [
     "static/**/*",
-    "static/typings/**/*",
   ],
   "exclude": [
     "test/index.spec.ts"

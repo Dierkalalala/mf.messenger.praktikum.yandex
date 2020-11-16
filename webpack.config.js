@@ -3,14 +3,14 @@ const path = require( 'path' );
 module.exports = {
 
     // bundling mode
-    mode: 'production',
+    mode: 'development',
 
     // entry files
-    entry: './static/script/main.ts',
+    entry: './static/dist/script/main.js',
 
     // output bundles (location)
     output: {
-        path: path.resolve( __dirname, 'static/dist' ),
+        path: path.resolve( __dirname, 'static/' ),
         filename: 'main.js',
     },
 

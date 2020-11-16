@@ -20,8 +20,8 @@ class signUpPage extends Block {
     button: Button
     inputs: Inputs;
 
-    constructor(props : Prop) {
-        super('div', props);
+    constructor() {
+        super('div');
         checkForAuth('/profile/edit');
         this.button = new Button({
             type: 'submit',
@@ -116,4 +116,4 @@ class signUpPage extends Block {
 
 
 
-export default signUpPage;
+export default new signUpPage();

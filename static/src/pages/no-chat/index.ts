@@ -1,4 +1,3 @@
-
 import Block from '../../../vendor/block/index'
 import ChatSidebar from '../../components/chat-sidebar/index';
 import pageTemplate from './template';
@@ -16,8 +15,8 @@ interface Prop {
 class noChatPage extends Block {
     sidebar: Sidebar;
     noChatPageElement : unknown;
-    constructor(props : Prop) {
-        super('div', props);
+    constructor() {
+        super('div');
         this.noChatPageElement = '';
 
     }
@@ -33,7 +32,7 @@ class noChatPage extends Block {
                 resolve(store.chats);
             } else {
                 chatsApiHandler.getAllChats()
-                    .then(res => {
+                    .then((res) => {
                         store.set('chats', {activeChats: res.response});
                         resolve(res.response)
                     })
@@ -67,7 +66,7 @@ class noChatPage extends Block {
 
                 rootElement.appendChild(noChatPage.noChatPageElement);
 
-                let createNewChatButton = document.querySelector('-create-new-chat') as HTMLElement;
+                let createNewChatButton = document.querySelector('.js-create-new-chat') as HTMLElement;
 
                 createNewChatButton.addEventListener('submit', (e: Event) => {
                     e.preventDefault();
@@ -83,10 +82,10 @@ class noChatPage extends Block {
                                         this.setProps({chats: res.response});
                                         this.registerEvents();
                                     })
-                                    .catch(err => alert(err));
+                                    .catch(err => console.log(err));
                             }
                         })
-                        .catch(err => alert(err));
+                        .catch(err => console.log(err));
                 })
 
                 document.addEventListener('click', (e: Event) => {
@@ -108,4 +107,4 @@ class noChatPage extends Block {
 }
 
 
-export default noChatPage;
+export default new noChatPage();

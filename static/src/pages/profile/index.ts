@@ -13,11 +13,6 @@ import checkForAuth from "../../module/isAuth";
 const router = new Router('.app') as Router
 
 
-interface Prop {
-    [items: string] : unknown
-}
-
-
 function signOut() {
     AuthApiClass.logOut()
         .then(() => {
@@ -28,14 +23,17 @@ function signOut() {
 }
 
 class ProfilePage extends Block {
-    rootElement: HTMLElement;
+    rootElement: HTMLElement | null;
     profilePageElement: HTMLElement;
     sidebar: Sidebar
 
-    constructor(props: Prop) {
-        super('div', props);
-        this.rootElement = document.querySelector('.app') as HTMLElement;
-        this.profilePageElement = document.createElement('div') as HTMLElement;
+    constructor() {
+        super('div');
+        this.rootElement = document.querySelector('.app');
+        if (this.rootElement === null) {
+            throw new Error('Корневого элемента не существует')
+        }
+        this.profilePageElement = document.createElement('div');
         this.registerEvents();
     }
 
@@ -130,6 +128,6 @@ class ProfilePage extends Block {
     }
 }
 
-export default ProfilePage;
+export default new ProfilePage();
 
 

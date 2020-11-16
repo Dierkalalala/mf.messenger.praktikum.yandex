@@ -36,7 +36,7 @@ function clickToLink(e: MouseEvent) {
                 return el;
             }
         } catch (e) {
-            alert(e)
+            console.log(e)
         }
     });
     if (isAnchor) {

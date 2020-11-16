@@ -1,23 +1,35 @@
-import AuthApiClass from "../api/auth-api.js";
-import store from "../../vendor/state/index.js";
-import Router from "../../vendor/router/index.js";
-let router = new Router('.app');
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _authApi = _interopRequireDefault(require("../api/auth-api"));
+
+var _index = _interopRequireDefault(require("../../vendor/state/index"));
+
+var _index2 = _interopRequireDefault(require("../../vendor/router/index"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var router = new _index2["default"]('.app');
+
 function checkForAuth(url) {
-    if (!store.get('auth').id) {
-        AuthApiClass.request()
-            .then(function (res) {
-            store.set('auth', res.response);
-            if (store.checkForAuth()) {
-                router.go(url);
-            }
-            else {
-                router.go('/');
-            }
-        })
-            .catch((err) => {
-            console.log(err);
-        });
-    }
+  if (!_index["default"].get('auth').id) {
+    _authApi["default"].request().then(function (res) {
+      _index["default"].set('auth', res.response);
+
+      if (_index["default"].checkForAuth()) {
+        router.go(url);
+      } else {
+        router.go('/');
+      }
+    })["catch"](function (err) {
+      console.log(err);
+    });
+  }
 }
-export default checkForAuth;
-//# sourceMappingURL=isAuth.js.map
+
+var _default = checkForAuth;
+exports["default"] = _default;

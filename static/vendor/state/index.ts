@@ -3,14 +3,18 @@ import noChat from '../../src/pages/open-chat/index';
 import openChat from '../../src/pages/no-chat/index';
 import ProfileEditPage from "../../src/pages/profile-edit/index";
 
+interface IndexSignature {
+    [key: string]: ProxyConstructor;
+}
 
 type Iterable = {
     [items: string] : unknown
 }
 
 
-class State {
+class State implements IndexSignature{
     private static __instance: State;
+    [key: string]: any;
     chats: Iterable;
     auth: Iterable
     users: Iterable;
@@ -40,8 +44,8 @@ class State {
             },
             set(target: Iterable, prop: string, newValue) {
                 target[prop] = newValue;
-                new noChat().eventBus.emit('flow:component-did-update');
-                new openChat().eventBus.emit('flow:component-did-update');
+                noChat.eventBus.emit('flow:component-did-update');
+                openChat.eventBus.emit('flow:component-did-update');
                 return true;
             },
             deleteProperty(target, prop) {
@@ -56,8 +60,8 @@ class State {
             },
             set(target : Iterable , prop : string, newValue) {
                 target[prop] = newValue;
-                new ProfilePage().eventBus.emit('flow:component-did-update');
-                new ProfileEditPage().eventBus.emit('flow:component-did-update');
+                ProfilePage.eventBus.emit('flow:component-did-update');
+                ProfileEditPage.eventBus.emit('flow:component-did-update');
                 return true;
             },
             deleteProperty(target, prop) {
@@ -73,8 +77,8 @@ class State {
             set(target: Iterable, prop: string, newValue) {
                 console.log('set');
                 target[prop] = newValue;
-                new ProfilePage().eventBus.emit('flow:component-did-update');
-                new ProfileEditPage().eventBus.emit('flow:component-did-update');
+                ProfilePage.eventBus.emit('flow:component-did-update');
+                ProfileEditPage.eventBus.emit('flow:component-did-update');
                 return true;
             },
             deleteProperty(target: Iterable, prop: string) {
@@ -89,7 +93,7 @@ class State {
             },
             set(target: Iterable, prop: string, newValue) {
                 target[prop] = newValue;
-                new noChat().eventBus.emit('flow:component-did-update');
+                noChat.eventBus.emit('flow:component-did-update');
                 return true;
             },
             deleteProperty(target, prop) {
@@ -105,7 +109,7 @@ class State {
     };
 
     set(name: string, object: unknown) {
-        Object.assign( (this[name] as ProxyConstructor), object);
+        Object.assign( this[name], object);
     }
 
     clearAll() {
@@ -113,9 +117,9 @@ class State {
         this._generateProxies();
     }
 
-    get(name) {
+    get(name : string) {
         return this[name];
     }
 }
-let store = new State()
+let store = new State();
 export default store;

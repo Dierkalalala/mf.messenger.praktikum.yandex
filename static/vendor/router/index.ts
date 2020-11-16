@@ -1,7 +1,8 @@
-import Block from '../block/index'
 import Route from '../route/index';
+import Block from "../block";
 
-
+interface PageComponent extends Block {
+}
 
 class Router {
     routes: Route[]
@@ -23,7 +24,7 @@ class Router {
         Router.__instance = this;
     }
 
-    use(pathname: string, block: Block) {
+    use(pathname: string, block: PageComponent) {
         const route = new Route(pathname, block, {rootQuery: this._rootQuery});
         this.routes.push(route);
         return this;
@@ -31,18 +32,22 @@ class Router {
 
     start() {
         window.onpopstate = ((event: PopStateEvent) => {
-            let currentTarget : HTMLDocument = event.currentTarget as HTMLDocument;
-            let location = currentTarget.location!.pathname;
-            this._onRoute(location)
+            let currentTarget: HTMLDocument = event.currentTarget as HTMLDocument;
+            if (currentTarget.location !== null) {
+                let location = currentTarget.location.pathname;
+                this._onRoute(location)
+            }
         });
-        this._onRoute(document.location!.pathname);
+        if (document.location !== null) {
+            this._onRoute(document.location.pathname);
+        }
     }
 
     _onRoute(pathname: string) {
         const route = this.getRoute(pathname);
 
-        if ( this._currentRoute && this._currentRoute._pathname !== pathname) {
-            (this._currentRoute as Route).leave();
+        if (this._currentRoute && this._currentRoute._pathname !== pathname) {
+            this._currentRoute.leave();
         }
         if (route === undefined) {
             this._currentRoute = this.routes[0];
@@ -55,10 +60,9 @@ class Router {
 
     go(pathname: string) {
         if (this._currentRoute !== null) {
-            this.history.pushState( this._currentRoute._pathname, pathname, pathname);
+            this.history.pushState(this._currentRoute._pathname, pathname, pathname);
             this._onRoute(pathname);
         }
-
     }
 
     back() {

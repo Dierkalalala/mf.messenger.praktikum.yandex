@@ -1,8 +1,9 @@
+import Block from '../../../vendor/block/index'
+import template from './template';
 interface Prop {
     [key: string]: unknown
 }
-import Block from '../../../vendor/block/index'
-import template from './template';
+
 
 
 class Button extends Block {
