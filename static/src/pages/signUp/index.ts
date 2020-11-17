@@ -1,4 +1,3 @@
-
 import Button from '../../components/button/index';
 import Block from '../../../vendor/block/index'
 import Validation from '../../../src/module/Validation'
@@ -11,25 +10,53 @@ import checkForAuth from '../../../src/module/isAuth'
 const router = new Router('.app');
 
 interface Prop {
-    [items: string] : unknown
+    [items: string]: unknown
 }
+
 interface Inputs {
-    [items: string]: { [key: string ] : boolean | string | number }
+    [items: string]: { [key: string]: boolean | string | number }
 }
+
 class signUpPage extends Block {
     button: Button
     inputs: Inputs;
+    rootElement: HTMLElement | null;
+
+    hide() {
+        if (this.rootElement !== null) {
+            this.rootElement.removeChild(this._render());
+        }
+    }
+
+    show() {
+        if (this.rootElement !== null) {
+            this.renderTo(this.rootElement)
+        }
+    }
 
     constructor() {
         super('div');
-        checkForAuth('/profile/edit');
+
         this.button = new Button({
             type: 'submit',
             className: 'default-button',
             text: 'Авторизоваться'
         });
         this.inputs = {
+            first_name: {
+                required: true,
+            },
+            second_name: {
+                required: true,
+            },
             login: {
+                required: true
+            },
+            email: {
+                required: true,
+                email: true,
+            },
+            phone: {
                 required: true,
             },
             password: {
@@ -38,8 +65,10 @@ class signUpPage extends Block {
             }
         };
     }
+
     _fetchData() {
-        this.props = Object.assign(Object.assign({}, this.props), { components: {
+        this.props = Object.assign(Object.assign({}, this.props), {
+            components: {
                 button: this.button.render()
             }, pageTitile: 'Регистрация',
             reason: '',
@@ -74,28 +103,33 @@ class signUpPage extends Block {
                     type: 'tel',
                     placeholder: 'Номер телефона'
                 },
-            ] });
+            ]
+        });
     }
 
     render() {
         return Mustache.render(pageTemplate, this.props);
     }
-    renderTo(rootElement : HTMLElement) {
+
+    renderTo(rootElement: HTMLElement) {
+        checkForAuth('/');
         this._fetchData();
         rootElement.appendChild(this._render());
+        this.rootElement = rootElement;
         Validation.validate(this.inputs);
-        let forms = document.querySelectorAll('form');
+        let forms = document.querySelectorAll('.js-sign-up-form');
         Array.from(forms).forEach(form => {
             form.addEventListener('submit', (e) => {
-                let isValidData : FormData = submitForm(e) as FormData;
+                let isValidData: FormData = submitForm(e, this.inputs) as FormData;
                 if (isValidData) {
-                    let object : Prop = {};
+                    let object: Prop = {};
                     isValidData.forEach(function (value, key) {
                         object[key] = value;
                     });
                     const json = JSON.stringify(object);
                     AuthApiClass.singUp(json)
                         .then(resp => {
+                            console.log(resp);
                             if (resp.status === 400 || resp.status === 409) {
                                 this.props = {...this.props, reason: resp.response.reason};
                                 this.eventBus.emit(Block.EVENTS.FLOW_CDU);
@@ -112,8 +146,6 @@ class signUpPage extends Block {
         });
     }
 }
-
-
 
 
 export default new signUpPage();

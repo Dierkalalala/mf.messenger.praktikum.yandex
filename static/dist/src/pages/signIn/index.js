@@ -56,6 +56,22 @@ var signInPage = /*#__PURE__*/function (_Block) {
 
   var _super = _createSuper(signInPage);
 
+  _createClass(signInPage, [{
+    key: "hide",
+    value: function hide() {
+      if (this.rootElement !== null) {
+        this.rootElement.removeChild(this._render());
+      }
+    }
+  }, {
+    key: "show",
+    value: function show() {
+      if (this.rootElement !== null) {
+        this.renderTo(this.rootElement);
+      }
+    }
+  }]);
+
   function signInPage() {
     var _this;
 
@@ -69,7 +85,8 @@ var signInPage = /*#__PURE__*/function (_Block) {
 
     _defineProperty(_assertThisInitialized(_this), "rootElement", void 0);
 
-    (0, _isAuth["default"])('/profile');
+    _this.registerListeners();
+
     _this.button = new _index["default"]({
       type: 'submit',
       className: 'default-button',
@@ -88,6 +105,11 @@ var signInPage = /*#__PURE__*/function (_Block) {
   }
 
   _createClass(signInPage, [{
+    key: "registerListeners",
+    value: function registerListeners() {
+      this.eventBus.on(_index2["default"].EVENTS.FLOW_CDU, this.show.bind(this));
+    }
+  }, {
     key: "_fetchData",
     value: function _fetchData() {
       this.props = Object.assign(Object.assign({}, this.props), {
@@ -115,10 +137,10 @@ var signInPage = /*#__PURE__*/function (_Block) {
     }
   }, {
     key: "renderTo",
-    value: function renderTo() {
+    value: function renderTo(rootElement) {
       var _this2 = this;
 
-      var rootElement = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.rootElement;
+      (0, _isAuth["default"])('/profile');
       this.rootElement = rootElement;
 
       this._fetchData();
@@ -129,7 +151,7 @@ var signInPage = /*#__PURE__*/function (_Block) {
 
       var inputControls = Array.from(document.querySelectorAll('.js-input-control'));
       new _placeholder["default"](inputControls);
-      var forms = document.querySelectorAll('form');
+      var forms = document.querySelectorAll('.js-sign-in-form');
       Array.from(forms).forEach(function (form) {
         form.addEventListener('submit', function (e) {
           var isValidData = (0, _form_handler["default"])(e);

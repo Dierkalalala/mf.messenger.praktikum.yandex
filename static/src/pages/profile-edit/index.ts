@@ -58,7 +58,7 @@ class ProfileEditPage extends Block {
 
     _fetchData() {
         return new Promise((resolve, reject) => {
-            isAuth('/profile/edit');
+            isAuth('/profile-edit');
             UserApiClass
                 .getUserById(store.auth.id)
                 .then(res => resolve(res))
@@ -174,7 +174,7 @@ class ProfileEditPage extends Block {
 
                 ProfileEditPage.profilePageElement.style.display = 'none';
 
-                if (router._currentRoute._pathname === '/profile/edit' ) {
+                if (router._currentRoute._pathname === '/profile-edit' ) {
                     ProfileEditPage.profilePageElement.style.display = 'block';
                 }
 

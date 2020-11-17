@@ -69,9 +69,8 @@ const ValidationMethods = {
     validateFieldsImmediately: function (inputs: Inputs) {
         if (inputs == undefined) {
             inputs = ValidationMethods.inputs;
-
         }
-
+        console.log(inputs);
         let has_errors: boolean = false;
 
         for (let name in inputs) {

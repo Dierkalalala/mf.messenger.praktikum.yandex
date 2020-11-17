@@ -1,23 +1,18 @@
-
 import state from "../../../vendor/state/index";
 import Sidebar from '../../components/sidebar/index';
-
 import pageTemplate from './template';
-
-
 import Block from "../../../vendor/block/index";
 import Router from "../../../vendor/router/index";
 import AuthApiClass from "../../../src/api/auth-api";
-import checkForAuth from "../../module/isAuth";
 
-const router = new Router('.app') as Router
+const router = new Router('.app');
 
 
 function signOut() {
     AuthApiClass.logOut()
         .then(() => {
             state.clearAll();
-            checkForAuth('/profile');
+            router.go('/')
         })
         .catch(err => console.log(err));
 }
@@ -30,9 +25,6 @@ class ProfilePage extends Block {
     constructor() {
         super('div');
         this.rootElement = document.querySelector('.app');
-        if (this.rootElement === null) {
-            throw new Error('Корневого элемента не существует')
-        }
         this.profilePageElement = document.createElement('div');
         this.registerEvents();
     }
@@ -42,26 +34,19 @@ class ProfilePage extends Block {
     }
 
     hide() {
-        try {
-            ProfilePage.profilePageElement.style.display = 'none';
-        } catch (e) {
-            void e
-        }
+        ProfilePage.profilePageElement.innerHTML = '';
     }
 
     show() {
-        try {
-            ProfilePage.profilePageElement.style.display = 'block';
-        } catch (e) {
-            void e
-        }
+        ProfilePage.profilePageElement.style.display = 'block';
     }
+
 
     _fetchData() {
         return new Promise((resolve, reject) => {
 
             if (state.auth.hasOwnProperty('id')) {
-                resolve(state.auth)
+                resolve(state.auth);
             } else {
                 reject('error');
             }
@@ -72,9 +57,12 @@ class ProfilePage extends Block {
         return Mustache.render(pageTemplate, this.props);
     }
 
-    renderTo() {
+    renderTo(): HTMLElement | void {
         this._fetchData()
             .then(res => {
+                if (this.rootElement === null && router === null) {
+                    return
+                }
                 this.sidebar = new Sidebar({href: '/no-chat'}) as Sidebar;
                 this.props = Object.assign(Object.assign({}, this.props),
                     {
@@ -94,29 +82,28 @@ class ProfilePage extends Block {
                             }
                         ]
                     });
-                try {
 
+                try {
                     this.rootElement.removeChild(ProfilePage.profilePageElement);
 
                 } catch (e) {
-                    console.log('not deleter')
+                    console.log('not deleted')
                 }
 
-                ProfilePage.profilePageElement = this._render();
-
+                ProfilePage.profilePageElement.innerHTML = this._render();
 
                 this.rootElement.appendChild(ProfilePage.profilePageElement);
 
-
                 ProfilePage.profilePageElement.style.display = 'none';
 
-                if ( router._currentRoute._pathname === '/profile') {
+                if (router._currentRoute._pathname === '/profile' ) {
                     ProfilePage.profilePageElement.style.display = 'block';
                 }
 
-                let signOutButton = document.querySelector('-sign-out') as HTMLElement;
-
-                signOutButton.addEventListener('click', signOut.bind(this));
+                let signOutButton = ProfilePage.profilePageElement.querySelector('.js-sign-out')
+                if (signOutButton !== null) {
+                    signOutButton.addEventListener('click', signOut.bind(this));
+                }
 
             })
             .catch(err => {

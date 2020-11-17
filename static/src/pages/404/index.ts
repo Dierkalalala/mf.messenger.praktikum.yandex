@@ -1,6 +1,4 @@
-
 import Error from '../../components/httpError/Index';
-
 interface Prop {
     code: number,
     message: string,
@@ -13,8 +11,6 @@ class notFoundError extends Error {
         super((props as Prop));
     }
 
-
-
     renderTo(rootElement: HTMLElement) {
 
         rootElement.appendChild(this._render());
@@ -22,5 +18,5 @@ class notFoundError extends Error {
 }
 
 
-export default new notFoundError({code: 404, message: 'Не туда попали', link_message: 'Назад к чатам', href: '/no-chat.html',});
+export default new notFoundError({code: 404, message: 'Не туда попали', link_message: 'Назад к чатам', href: '/no-chat',});
 

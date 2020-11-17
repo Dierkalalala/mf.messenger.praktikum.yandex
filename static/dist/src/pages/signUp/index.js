@@ -58,6 +58,22 @@ var signUpPage = /*#__PURE__*/function (_Block) {
 
   var _super = _createSuper(signUpPage);
 
+  _createClass(signUpPage, [{
+    key: "hide",
+    value: function hide() {
+      if (this.rootElement !== null) {
+        this.rootElement.removeChild(this._render());
+      }
+    }
+  }, {
+    key: "show",
+    value: function show() {
+      if (this.rootElement !== null) {
+        this.renderTo(this.rootElement);
+      }
+    }
+  }]);
+
   function signUpPage() {
     var _this;
 
@@ -69,14 +85,28 @@ var signUpPage = /*#__PURE__*/function (_Block) {
 
     _defineProperty(_assertThisInitialized(_this), "inputs", void 0);
 
-    (0, _isAuth["default"])('/profile/edit');
+    _defineProperty(_assertThisInitialized(_this), "rootElement", void 0);
+
     _this.button = new _index["default"]({
       type: 'submit',
       className: 'default-button',
       text: 'Авторизоваться'
     });
     _this.inputs = {
+      first_name: {
+        required: true
+      },
+      second_name: {
+        required: true
+      },
       login: {
+        required: true
+      },
+      email: {
+        required: true,
+        email: true
+      },
+      phone: {
         required: true
       },
       password: {
@@ -133,16 +163,19 @@ var signUpPage = /*#__PURE__*/function (_Block) {
     value: function renderTo(rootElement) {
       var _this2 = this;
 
+      (0, _isAuth["default"])('/');
+
       this._fetchData();
 
       rootElement.appendChild(this._render());
+      this.rootElement = rootElement;
 
       _Validation["default"].validate(this.inputs);
 
-      var forms = document.querySelectorAll('form');
+      var forms = document.querySelectorAll('.js-sign-up-form');
       Array.from(forms).forEach(function (form) {
         form.addEventListener('submit', function (e) {
-          var isValidData = (0, _form_handler["default"])(e);
+          var isValidData = (0, _form_handler["default"])(e, _this2.inputs);
 
           if (isValidData) {
             var object = {};
@@ -152,6 +185,8 @@ var signUpPage = /*#__PURE__*/function (_Block) {
             var json = JSON.stringify(object);
 
             _authApi["default"].singUp(json).then(function (resp) {
+              console.log(resp);
+
               if (resp.status === 400 || resp.status === 409) {
                 _this2.props = _objectSpread(_objectSpread({}, _this2.props), {}, {
                   reason: resp.response.reason

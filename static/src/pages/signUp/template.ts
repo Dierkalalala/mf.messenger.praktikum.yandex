@@ -1,7 +1,7 @@
 let pageTemplate : string = `
         <div class="page-center">
         <div class="auth-form-wrapper">
-            <form action="" method="post">
+            <form class="js-sign-up-form" action="" method="post">
                 <div class="upper-form-block">
                     <h1 class="form-title">
                         {{pageTitile}}

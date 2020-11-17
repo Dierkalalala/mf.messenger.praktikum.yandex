@@ -17,8 +17,6 @@ var _index4 = _interopRequireDefault(require("../../../vendor/router/index"));
 
 var _authApi = _interopRequireDefault(require("../../../src/api/auth-api"));
 
-var _isAuth = _interopRequireDefault(require("../../module/isAuth"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -51,7 +49,7 @@ function signOut() {
   _authApi["default"].logOut().then(function () {
     _index["default"].clearAll();
 
-    (0, _isAuth["default"])('/profile');
+    router.go('/');
   })["catch"](function (err) {
     return console.log(err);
   });
@@ -76,11 +74,6 @@ var ProfilePage = /*#__PURE__*/function (_Block) {
     _defineProperty(_assertThisInitialized(_this), "sidebar", void 0);
 
     _this.rootElement = document.querySelector('.app');
-
-    if (_this.rootElement === null) {
-      throw new Error('Корневого элемента не существует');
-    }
-
     _this.profilePageElement = document.createElement('div');
 
     _this.registerEvents();
@@ -96,20 +89,12 @@ var ProfilePage = /*#__PURE__*/function (_Block) {
   }, {
     key: "hide",
     value: function hide() {
-      try {
-        ProfilePage.profilePageElement.style.display = 'none';
-      } catch (e) {
-        void e;
-      }
+      ProfilePage.profilePageElement.innerHTML = '';
     }
   }, {
     key: "show",
     value: function show() {
-      try {
-        ProfilePage.profilePageElement.style.display = 'block';
-      } catch (e) {
-        void e;
-      }
+      ProfilePage.profilePageElement.style.display = 'block';
     }
   }, {
     key: "_fetchData",
@@ -133,6 +118,10 @@ var ProfilePage = /*#__PURE__*/function (_Block) {
       var _this2 = this;
 
       this._fetchData().then(function (res) {
+        if (_this2.rootElement === null && router === null) {
+          return;
+        }
+
         _this2.sidebar = new _index2["default"]({
           href: '/no-chat'
         });
@@ -154,10 +143,10 @@ var ProfilePage = /*#__PURE__*/function (_Block) {
         try {
           _this2.rootElement.removeChild(ProfilePage.profilePageElement);
         } catch (e) {
-          console.log('not deleter');
+          console.log('not deleted');
         }
 
-        ProfilePage.profilePageElement = _this2._render();
+        ProfilePage.profilePageElement.innerHTML = _this2._render();
 
         _this2.rootElement.appendChild(ProfilePage.profilePageElement);
 
@@ -167,8 +156,11 @@ var ProfilePage = /*#__PURE__*/function (_Block) {
           ProfilePage.profilePageElement.style.display = 'block';
         }
 
-        var signOutButton = document.querySelector('-sign-out');
-        signOutButton.addEventListener('click', signOut.bind(_this2));
+        var signOutButton = ProfilePage.profilePageElement.querySelector('.js-sign-out');
+
+        if (signOutButton !== null) {
+          signOutButton.addEventListener('click', signOut.bind(_this2));
+        }
       })["catch"](function (err) {
         console.log(err);
         router.go('/');

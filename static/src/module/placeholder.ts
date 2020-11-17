@@ -10,14 +10,15 @@ class InputPlaceholder {
 
     static blur(input: HTMLInputElement) {
         let parent = input.closest('label');
-        console.log(input.value);
-        if (input.value === '' && parent !== null) {
+        if (parent === null) {
+            return;
+        }
+        if (input.value === '') {
             parent.classList.remove('js-focused');
             return false
         }
-        if (parent !== null) {
-            parent.classList.add('js-focused');
-        }
+        parent.classList.add('js-focused');
+
     }
 }
 

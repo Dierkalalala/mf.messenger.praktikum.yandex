@@ -25,6 +25,6 @@ export default new errorPage({
     code: 500,
     message: 'Мы уже активно фиксим',
     link_message: 'Назад к чатам',
-    href: '/no-chat.html',
+    href: '/no-chat',
 });
 

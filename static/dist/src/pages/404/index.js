@@ -56,7 +56,7 @@ var _default = new notFoundError({
   code: 404,
   message: 'Не туда попали',
   link_message: 'Назад к чатам',
-  href: '/no-chat.html'
+  href: '/no-chat'
 });
 
 exports["default"] = _default;

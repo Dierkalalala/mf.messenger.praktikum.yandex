@@ -24,10 +24,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 
 new _modal["default"]();
 var router = new _index5["default"](".app");
-router.use("/404", _index["default"]).use("/500", _index2["default"]).use('/', _index3["default"]).use('/sign-up', _index4["default"]).use('/no-chat', _index6["default"]).use('/open-chat', _index8["default"]).use('/profile', _index7["default"]).use('/profile/edit', _index9["default"]).start();
+router.use("/404", _index["default"]).use("/500", _index2["default"]).use('/', _index3["default"]).use('/sign-up', _index4["default"]).use('/no-chat', _index6["default"]).use('/open-chat', _index8["default"]).use('/profile', _index7["default"]).use('/profile-edit', _index9["default"]).start();
 document.addEventListener('click', clickToLink);
 
 function clickToLink(e) {
+  console.log(e);
   var path = e.composedPath();
   path.pop();
   path.pop();

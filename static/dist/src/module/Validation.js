@@ -63,6 +63,7 @@ var ValidationMethods = {
       inputs = ValidationMethods.inputs;
     }
 
+    console.log(inputs);
     var has_errors = false;
 
     var _loop2 = function _loop2(name) {

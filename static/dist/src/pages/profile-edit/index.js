@@ -113,7 +113,7 @@ var ProfileEditPage = /*#__PURE__*/function (_Block) {
     key: "_fetchData",
     value: function _fetchData() {
       return new Promise(function (resolve, reject) {
-        (0, _isAuth["default"])('/profile/edit');
+        (0, _isAuth["default"])('/profile-edit');
 
         _userApi["default"].getUserById(_index4["default"].auth.id).then(function (res) {
           return resolve(res);
@@ -226,7 +226,7 @@ var ProfileEditPage = /*#__PURE__*/function (_Block) {
 
         ProfileEditPage.profilePageElement.style.display = 'none';
 
-        if (router._currentRoute._pathname === '/profile/edit') {
+        if (router._currentRoute._pathname === '/profile-edit') {
           ProfileEditPage.profilePageElement.style.display = 'block';
         }
 

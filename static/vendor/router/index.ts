@@ -2,6 +2,7 @@ import Route from '../route/index';
 import Block from "../block";
 
 interface PageComponent extends Block {
+    renderTo(root: HTMLElement): void;
 }
 
 class Router {

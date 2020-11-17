@@ -1,4 +1,3 @@
-
 import Button from '../../components/button/index';
 import pageTemplate from './template'
 import Block from '../../../vendor/block/index'
@@ -23,10 +22,22 @@ class signInPage extends Block {
     inputs: Inputs;
     rootElement: HTMLElement;
 
+    hide() {
+        if (this.rootElement !== null) {
+            this.rootElement.removeChild(this._render());
+        }
+    }
+
+    show() {
+        if (this.rootElement !== null) {
+            this.renderTo(this.rootElement)
+        }
+    }
+
     constructor() {
         super('div');
-        isAuth('/profile');
 
+        this.registerListeners()
         this.button = new Button({
             type: 'submit',
             className: 'default-button',
@@ -41,6 +52,9 @@ class signInPage extends Block {
                 minLength: 6,
             }
         };
+    }
+    registerListeners() {
+        this.eventBus.on(Block.EVENTS.FLOW_CDU, this.show.bind(this));
     }
 
 
@@ -68,19 +82,20 @@ class signInPage extends Block {
         return Mustache.render(pageTemplate, this.props);
     }
 
-    renderTo(rootElement = this.rootElement) {
+    renderTo(rootElement: HTMLElement) {
+        isAuth('/profile');
         this.rootElement = rootElement;
         this._fetchData();
         rootElement.appendChild(this._render());
         Validation.validate(this.inputs);
-        let inputControls = Array.from(document.querySelectorAll('.js-input-control'))
+        let inputControls = Array.from(document.querySelectorAll('.js-input-control'));
         new Placeholder(inputControls);
-        let forms = document.querySelectorAll('form');
+        let forms = document.querySelectorAll('.js-sign-in-form');
         Array.from(forms).forEach(form => {
             form.addEventListener('submit', (e) => {
                 let isValidData: FormData = submitForm(e) as FormData;
                 if (isValidData) {
-                    let object : Prop = {};
+                    let object: Prop = {};
                     isValidData.forEach(function (value, key) {
                         object[key] = value;
                     });

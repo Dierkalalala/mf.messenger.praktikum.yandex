@@ -5,6 +5,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ChatsApi = exports.UserApi = exports.AuthApi = void 0;
 
+var _baseUrl = _interopRequireDefault(require("./baseUrl"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -27,13 +31,10 @@ function queryStringify(data) {
     return acc + "".concat(keyName, "=").concat(keyValue.toString(), "&");
   }, '?');
 }
-/*function convert(str: string) {
-    return str.replace(/&quot;/g, '"')
-        .replace(/&gt;/g, '>')
-        .replace(/&lt;/g, '<')
-        .replace(/&amp;/g, '&')
-}*/
 
+function convert(str) {
+  return str.replace(/&quot;/g, '"').replace(/&gt;/g, '>').replace(/&lt;/g, '<').replace(/&amp;/g, '&');
+}
 
 var HTTPTransport = function HTTPTransport(prefix) {
   var _this = this;
@@ -42,7 +43,7 @@ var HTTPTransport = function HTTPTransport(prefix) {
 
   _defineProperty(this, "prefix", void 0);
 
-  _defineProperty(this, "baseUrl", 'https://ya-praktikum.tech/api/v2');
+  _defineProperty(this, "baseUrl", _baseUrl["default"]);
 
   _defineProperty(this, "get", function (url) {
     var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
@@ -105,11 +106,10 @@ var HTTPTransport = function HTTPTransport(prefix) {
       xhr.onabort = reject;
       xhr.onerror = reject;
       xhr.ontimeout = reject;
-      /*for (let key in (data as DataParams) ) {
-          if (typeof data[key] === 'string' || typeof data[key] === 'number') {
-              data[key] = convert(data[key]);
-          }
-      }*/
+
+      if (data !== undefined) {
+        data = convert(data);
+      }
 
       if (method == METHODS.GET || !data) {
         xhr.send();

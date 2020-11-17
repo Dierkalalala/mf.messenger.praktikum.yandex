@@ -34,7 +34,7 @@ let pageTemplate : string = `
         </div>
         <div class="personal-data personal-data-change">
             <div class="personal-data-links">
-                <a href="/profile/edit" class="default-link">
+                <a href="/profile-edit" class="default-link">
                     Изменить данные
                 </a>
 

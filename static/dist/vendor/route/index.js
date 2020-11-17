@@ -23,18 +23,18 @@ var Route = /*#__PURE__*/function () {
 
     _defineProperty(this, "_pathname", void 0);
 
-    _defineProperty(this, "_blockClass", void 0);
-
     _defineProperty(this, "_block", void 0);
 
     _defineProperty(this, "_props", void 0);
 
+    _defineProperty(this, "_isRendered", void 0);
+
     _defineProperty(this, "__root", void 0);
 
     this._pathname = pathname;
-    this._blockClass = view;
-    this._block = null;
+    this._block = view;
     this._props = props;
+    this._isRendered = false;
     this.__root = document.querySelector(this._props.rootQuery);
 
     if (this.__root === null) {
@@ -65,11 +65,11 @@ var Route = /*#__PURE__*/function () {
   }, {
     key: "render",
     value: function render() {
-      if (!this._block) {
-        this._block = this._blockClass;
-
-        if (this._block !== null && this.__root !== null) {
+      if (!this._isRendered) {
+        if (this.__root !== null) {
           this._block.renderTo(this.__root);
+
+          this._block.show();
         }
 
         return;

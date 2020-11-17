@@ -21,12 +21,13 @@ router
     .use('/no-chat', noChatPage)
     .use('/open-chat', openChatPage)
     .use('/profile', ProfilePage)
-    .use('/profile/edit', ProfileEditPage)
+    .use('/profile-edit', ProfileEditPage)
     .start();
 
 document.addEventListener('click', clickToLink);
 
 function clickToLink(e: MouseEvent) {
+    console.log(e);
     let path = e.composedPath();
     path.pop();
     path.pop();

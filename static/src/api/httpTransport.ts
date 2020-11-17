@@ -1,3 +1,4 @@
+import baseUri from './baseUrl'
 type DataParams = {
     [key: string]: string | number | object;
 }
@@ -24,16 +25,16 @@ function queryStringify(data: DataParams) {
     }, '?')
 }
 
-/*function convert(str: string) {
+function convert(str: string) {
     return str.replace(/&quot;/g, '"')
         .replace(/&gt;/g, '>')
         .replace(/&lt;/g, '<')
         .replace(/&amp;/g, '&')
-}*/
+}
 
 class HTTPTransport {
     prefix: string;
-    baseUrl = 'https://ya-praktikum.tech/api/v2';
+    baseUrl = baseUri;
 
     constructor(prefix: string) {
         this.prefix = prefix
@@ -100,11 +101,9 @@ class HTTPTransport {
             xhr.onerror = reject;
             xhr.ontimeout = reject;
 
-            /*for (let key in (data as DataParams) ) {
-                if (typeof data[key] === 'string' || typeof data[key] === 'number') {
-                    data[key] = convert(data[key]);
-                }
-            }*/
+            if(data !== undefined) {
+                data = convert((data as string));
+            }
 
             if (method == METHODS.GET || !data) {
                 xhr.send();

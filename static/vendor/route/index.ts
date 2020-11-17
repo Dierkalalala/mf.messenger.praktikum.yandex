@@ -1,10 +1,11 @@
 import Block from "../block";
+
 interface Prop {
     rootQuery: string
 }
 
-interface PageComponent extends Block{
-    renderTo(root: HTMLElement):void;
+interface PageComponent extends Block {
+    renderTo(root: HTMLElement): void;
 }
 
 function isEqual(lhs: string, rhs: string) {
@@ -13,16 +14,17 @@ function isEqual(lhs: string, rhs: string) {
 
 class Route {
     _pathname: string;
-    _blockClass: PageComponent;
-    _block: PageComponent | null;
+    _block: PageComponent;
     _props: Prop;
-    __root: HTMLElement | null
+    _isRendered: boolean;
+    __root: HTMLElement | null;
+
 
     constructor(pathname: string, view: PageComponent, props: Prop) {
         this._pathname = pathname;
-        this._blockClass = view;
-        this._block = null;
+        this._block = view;
         this._props = props;
+        this._isRendered = false;
         this.__root = document.querySelector(this._props.rootQuery);
         if (this.__root === null) {
             throw new Error('Кореневая директория не найдена')
@@ -47,10 +49,10 @@ class Route {
     }
 
     render() {
-        if (!this._block) {
-            this._block = this._blockClass;
-            if (this._block !== null && this.__root !== null) {
+        if (!this._isRendered) {
+            if (this.__root !== null) {
                 this._block.renderTo(this.__root);
+                this._block.show();
             }
             return;
         }
