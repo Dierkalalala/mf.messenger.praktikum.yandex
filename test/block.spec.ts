@@ -1,4 +1,4 @@
-import Block from '../static/src/vendor/block/index';
+/*import Block from '../static/src/vendor/block/index';
 var jsdom = require('mocha-jsdom')
 import {assert} from 'chai';
 
@@ -39,4 +39,4 @@ describe('Работоспособность компоненты', () => {
         assert.equal(block.element.innerHTML, '123');
     })
 
-})
+})*/
