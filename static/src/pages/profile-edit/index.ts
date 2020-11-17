@@ -1,22 +1,22 @@
-
 import Sidebar from '../../components/sidebar/index';
 import Button from '../../components/button/index';
 import pageTemplate from './template'
-import Validation from '../../../src/module/Validation'
-import submitForm from '../../../src/module/form_handler';
-import Block from "../../../vendor/block/index";
+import Validation from '../../module/Validation'
+import submitForm from '../../module/form_handler';
+import Block from "../../vendor/block/index";
 import UserApiClass from "../../api/user-api";
-import store from "../../../vendor/state/index";
+import store from "../../vendor/state/index";
 import isAuth from '../../module/isAuth'
-import Router from '../../../vendor/router/index'
+import Router from '../../vendor/router/index'
 
-let router = new Router('.app')
+let router : Router = new Router('.app')
 
 interface Inputs {
-    [items: string]: { [key: string ] : boolean | string | number }
+    [items: string]: { [key: string]: boolean | string | number }
 }
+
 interface Prop {
-    [items: string] : unknown
+    [items: string]: unknown
 }
 
 
@@ -26,8 +26,6 @@ class ProfileEditPage extends Block {
     savePersonalDataButton: Button;
     savePasswordButton: Button;
     sidebar: Sidebar;
-
-
 
     constructor() {
         super('div');
@@ -45,15 +43,23 @@ class ProfileEditPage extends Block {
     }
 
     getData() {
-        isAuth('/profile/edit');
+        isAuth('/profile-edit');
     }
 
     hide() {
-        ProfileEditPage.profilePageElement.style.display = 'none';
+        try {
+            ProfileEditPage.profilePageElement.remove();
+        } catch (e) {
+            void e
+        }
     }
 
     show() {
-        ProfileEditPage.profilePageElement.style.display = 'block';
+        try {
+            this.renderTo();
+        } catch (e) {
+            void e
+        }
     }
 
     _fetchData() {
@@ -163,7 +169,6 @@ class ProfileEditPage extends Block {
 
                 try {
                     this.rootElement.removeChild(ProfileEditPage.profilePageElement);
-
                 } catch (e) {
                     console.log('not deleted')
                 }
@@ -174,11 +179,11 @@ class ProfileEditPage extends Block {
 
                 ProfileEditPage.profilePageElement.style.display = 'none';
 
-                if (router._currentRoute._pathname === '/profile-edit' ) {
+                if (router._currentRoute._pathname === '/profile-edit') {
                     ProfileEditPage.profilePageElement.style.display = 'block';
                 }
 
-                const inputs : Inputs = {
+                const inputs: Inputs = {
                     login: {
                         required: true,
                     },
@@ -214,7 +219,7 @@ class ProfileEditPage extends Block {
                     form.addEventListener('submit', (e) => {
                         let isValidData = submitForm(e);
                         if (isValidData) {
-                            let object : Prop = {};
+                            let object: Prop = {};
                             (isValidData as FormData).forEach(function (value, key) {
                                 object[key] = value;
                             });

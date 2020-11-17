@@ -1,5 +1,5 @@
 
-import Block from '../../../vendor/block/index'
+import Block from '../../vendor/block/index'
 import template from './template';
 interface Prop {
     items?: { [key: string]: unknown }

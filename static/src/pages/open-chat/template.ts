@@ -158,7 +158,7 @@ let pageTemplate : string = `
                     <button class="btn-danger default-button">
                         Удалить
                     </button>
-                    <button data-js-modal-close class="btn-gray default-button">
+                    <button data-js-modal-close type="button" class="btn-gray default-button">
                         Отменить
                     </button>
                 </div>
@@ -175,7 +175,7 @@ let pageTemplate : string = `
                         <button type="submit" class="default-button">
                            Добавить
                         </button>
-                        <button data-js-modal-close class="btn-gray default-button">
+                        <button data-js-modal-close type="button" class="btn-gray default-button">
                             Отменить
                         </button>
                     </div>

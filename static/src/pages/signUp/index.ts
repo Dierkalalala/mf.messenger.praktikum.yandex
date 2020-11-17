@@ -1,11 +1,11 @@
 import Button from '../../components/button/index';
-import Block from '../../../vendor/block/index'
-import Validation from '../../../src/module/Validation'
-import submitForm from '../../../src/module/form_handler';
+import Block from '../../vendor/block/index'
+import Validation from '../../module/Validation'
+import submitForm from '../../module/form_handler';
 import pageTemplate from './template';
 import AuthApiClass from "../../api/auth-api";
-import Router from "../../../vendor/router/index";
-import checkForAuth from '../../../src/module/isAuth'
+import Router from "../../vendor/router/index";
+import checkForAuth from '../../module/isAuth'
 
 const router = new Router('.app');
 

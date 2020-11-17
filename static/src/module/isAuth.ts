@@ -1,6 +1,6 @@
 import AuthApiClass from "../api/auth-api";
-import store from "../../vendor/state/index";
-import Router from "../../vendor/router/index";
+import store from "../vendor/state/index";
+import Router from "../vendor/router/index";
 
 let router = new Router('.app');
 

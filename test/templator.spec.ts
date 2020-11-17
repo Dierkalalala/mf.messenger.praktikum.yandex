@@ -1,6 +1,6 @@
 import { expect } from "chai";
 
-const Mustache = require('../static/dist/vendor/templator/index.js');
+const Mustache = require('../static/src/vendor/templator/index.js');
 
 describe("Шаблонизатор", () => {
     it("Шаблонизатор должен вернуть html строку с данными", () => {

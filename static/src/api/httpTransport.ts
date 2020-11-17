@@ -118,3 +118,4 @@ class HTTPTransport {
 export const AuthApi = new HTTPTransport('/auth');
 export const UserApi = new HTTPTransport('/user');
 export const ChatsApi = new HTTPTransport('/chats');
+export const http = HTTPTransport;

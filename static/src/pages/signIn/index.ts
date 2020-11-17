@@ -1,11 +1,11 @@
 import Button from '../../components/button/index';
 import pageTemplate from './template'
-import Block from '../../../vendor/block/index'
-import Validation from '../../../src/module/Validation'
-import submitForm from '../../../src/module/form_handler';
+import Block from '../../vendor/block/index'
+import Validation from '../../module/Validation'
+import submitForm from '../../module/form_handler';
 import AuthApiClass from '../../api/auth-api';
-import isAuth from '../../../src/module/isAuth'
-import Placeholder from '../../../src/module/placeholder'
+import isAuth from '../../module/isAuth'
+import Placeholder from '../../module/placeholder'
 // import Router from "../../../vendor/router/index";
 // let router = new Router('.app')
 

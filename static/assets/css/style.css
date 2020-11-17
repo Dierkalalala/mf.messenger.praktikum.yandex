@@ -14,6 +14,9 @@ body {
 .d-flex {
   display: flex;
 }
+.chat-messages-header{
+  z-index: 2;
+}
 
 .auth-form-wrapper {
   max-width: 340px;

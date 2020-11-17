@@ -1,10 +1,10 @@
-import Block from '../../../vendor/block/index'
+import Block from '../../vendor/block/index'
 import ChatSidebar from '../../components/chat-sidebar/index';
 import pageTemplate from './template';
 import Sidebar from "../../components/sidebar/index";
-import store from "../../../vendor/state/index";
+import store from "../../vendor/state/index";
 import chatsApiHandler from '../../api/chats-api';
-import Router from "../../../vendor/router/index";
+import Router from "../../vendor/router/index";
 
 let router = new Router('.app');
 
@@ -21,19 +21,22 @@ class noChatPage extends Block {
 
     }
 
-    registerEvents() {
+    updateHTMLContent() {
         noChatPage.noChatPageElement.innerHTML = this._render().outerHTML;
+
+        this.addEventListeners();
     }
 
     _fetchData() {
 
         return new Promise((resolve, reject) => {
-            if (store.get('chats').activeChats) {
+            if (store.get('chats').length) {
+                console.log(store.get('chats'));
                 resolve(store.chats);
             } else {
                 chatsApiHandler.getAllChats()
                     .then((res) => {
-                        store.set('chats', {activeChats: res.response});
+                        store.set('chats',res.response);
                         resolve(res.response)
                     })
                     .catch(err => {
@@ -49,60 +52,70 @@ class noChatPage extends Block {
         return Mustache.render(pageTemplate, this.props);
     }
 
+    updateSideBar(res : Prop) {
+        this.sidebar = new ChatSidebar({
+            chats: res
+        });
+        this.props = Object.assign(Object.assign({}, this.props),
+            {
+                components: {
+                    sidebar: this.sidebar.render(),
+                }
+            });
+    }
+
     renderTo(rootElement : HTMLElement) {
         this._fetchData()
-            .then(res => {
-                this.sidebar = new ChatSidebar({
-                    chats: (res as Prop)
-                });
-                this.props = Object.assign(Object.assign({}, this.props),
-                    {
-                        components: {
-                            sidebar: this.sidebar.render(),
-                        }
-                    });
-
+            .then((res: Prop) => {
+                this.updateSideBar(res);
                 noChatPage.noChatPageElement = this._render();
 
                 rootElement.appendChild(noChatPage.noChatPageElement);
 
-                let createNewChatButton = document.querySelector('.js-create-new-chat') as HTMLElement;
+                this.addEventListeners();
 
-                createNewChatButton.addEventListener('submit', (e: Event) => {
-                    e.preventDefault();
-                    let target : unknown = e.target as HTMLFormElement;
-                    let targetInputTitle = (target as HTMLFormElement).title as unknown as HTMLInputElement
-                    let data = JSON.stringify({title: targetInputTitle});
-                    chatsApiHandler.createChat(data)
-                        .then(res => {
-                            if (res.status === 200) {
-                                chatsApiHandler.getAllChats()
-                                    .then(res => {
-                                        store.set('chats', res.response);
-                                        this.setProps({chats: res.response});
-                                        this.registerEvents();
-                                    })
-                                    .catch(err => console.log(err));
-                            }
-                        })
-                        .catch(err => console.log(err));
-                })
-
-                document.addEventListener('click', (e: Event) => {
-                    let path =  e.composedPath();
-                    path.pop()
-                    path.pop()
-
-                    let activaChat = Array.from(path).find(el => {
-                        return (el as HTMLElement).matches('[data-chat-id]');
-                    })
-                    if(activaChat !== undefined) {
-                        store.set('activeChat', {id: (activaChat as HTMLElement).getAttribute('data-chat-id') });
-                        router.go('/open-chat');
-                    }
-                })
             });
 
+    }
+
+    addEventListeners() {
+        let createNewChatButton = document.querySelector('.js-create-new-chat') as HTMLElement;
+
+        createNewChatButton.addEventListener('submit', (e: Event) => {
+            e.preventDefault();
+            let target: HTMLFormElement = e.target;
+            if (target == null) {
+                return;
+            }
+            let targetInputTitle = target.title.value;
+            let data = JSON.stringify({title: targetInputTitle});
+            chatsApiHandler.createChat(data)
+                .then(res => {
+                    if (res.status === 200) {
+                        chatsApiHandler.getAllChats()
+                            .then((res : Prop) => {
+                                store.set('chats', res.response);
+                                this.updateSideBar(res.response);
+                                this.updateHTMLContent();
+                            })
+                            .catch(err => console.log(err));
+                    }
+                })
+                .catch(err => console.log(err));
+        })
+
+        document.addEventListener('click', (e: Event) => {
+            let path =  e.composedPath();
+            path.pop()
+            path.pop()
+            let activaChat = Array.from(path).find(el => {
+                return (el as HTMLElement).matches('[data-chat-id]');
+            })
+            if(activaChat !== undefined) {
+                store.set('activeChat', {id: (activaChat as HTMLElement).getAttribute('data-chat-id') });
+                router.go('/open-chat');
+            }
+        })
     }
 }
 

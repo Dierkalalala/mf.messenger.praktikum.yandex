@@ -1,46 +1,73 @@
-import AuthApi from "../static/src/api/auth-api";
+import {http} from '../static/src/api/httpTransport';
 
 import {assert} from 'chai';
+import {createServer, Response} from "miragejs"
 
 interface httpResponseNeededParams {
+    [key: string] : unknown
     status: number
 }
 
+
 describe('HTTP запросы', () => {
-    it('Авторизация должна возвращать статус 200 при валидных данных', () => {
-        AuthApi.signIn(JSON.stringify({login: 'diyorbest@gmail.com', password: '070707diyor'}))
-            .then((res: httpResponseNeededParams) => assert.equal(res.status, 200))
-    })
+    before(function () {
+        createServer({
+            routes() {
+                this.namespace = "fake"
 
-    it('Авторизация должна возврашать статус 401 при неприавильных данных', () => {
-        AuthApi.signIn(JSON.stringify({login: 'diyorbest@gmail', password: '070707diyor'}))
-            .then((res:httpResponseNeededParams) => assert.equal(res.status, 401))
-    })
+                this.post("/chats", (schema, request) => {
+                    let attrs = JSON.parse(request.requestBody)
+                    attrs.id = Math.floor(Math.random() * 100)
 
-    it('Регистрация должна проходить при валидных данных', () => {
-        AuthApi.signIn(JSON.stringify({
-            email: "dierkaa@yandex.r",
-            first_name: "dierkaa@yandex.r",
-            login: "dierkaa@yandex.r",
-            password: "123456789qwerty",
-            phone: "+7(123)123-12-32",
-            second_name: "dierkaa@yandex.r"
-        }))
-            .then((res: httpResponseNeededParams) => assert.equal(res.status, 200))
-    })
+                    return {chats: attrs}
+                })
 
-    it('При запросе с авторизованного аккаунта должны возвращаться данные о пользователе', () => {
-        AuthApi.signIn(JSON.stringify({login: 'diyorbest@gmail.com', password: '070707diyor'}))
-            .then(() => {
-                AuthApi.request()
-                    .then(resp => assert.property(resp, 'id'));
+                // Using the `timing` option to slow down the response
+                this.get(
+                    "/chats",
+                    () => {
+                        return {
+                            movies: [
+                                {id: 1, name: "Inception", year: 2010},
+                                {id: 2, name: "Interstellar", year: 2014},
+                            ],
+                        }
+                    },
+                    {timing: 4000}
+                )
+
+                this.delete("/chats", () => {
+                    return new Response(200);
+                })
+
+                this.put('/chats', () => {
+                    return new Response(200);
+                })
+            },
+        })
+
+    });
+
+    let fakeApi = new http('/fake');
+
+    it('GET Запрос должен получать данные', () => {
+        fakeApi.get('/chats')
+            .then((res: httpResponseNeededParams) => assert.equal(res.movies[0].id, 1))
+    })
+    it('POTS Запрос должен отправлять данные', () => {
+        fakeApi.post('/chats', {data: JSON.stringify({title: 'new title'})})
+            .then(res => assert.property(res, 'chats'))
+    })
+    it('DELETE запрос должен удалять данные', () => {
+        fakeApi.put('/chats', {data: JSON.stringify({title: 'new title 2'})})
+            .then((res: httpResponseNeededParams) => {
+                assert.equal(res.status, 200)
             })
     })
-
-    it('Запрос с неавторизованного аккаунта должен возвращать ошибку', () => {
-        AuthApi.request()
-            .then()
-            .catch(err => assert.equal(err.status, 500))
+    it('PUT запрос должен обновлять данные', () => {
+        fakeApi.delete('/chats', {data: JSON.stringify({title: 'new title'})})
+            .then((res: httpResponseNeededParams) => assert.equal(res.status, 200))
     })
 
-})
+
+});

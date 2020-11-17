@@ -25,5 +25,6 @@ npm test
 
 ## Деплой проекта
 ```
+npm run prepare
 npm run build
 ```

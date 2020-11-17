@@ -1,4 +1,4 @@
-import Block from '../../../vendor/Block/index';
+import Block from '../../vendor/Block/index';
 import template from './Template';
 
 interface Prop {
