@@ -7,7 +7,8 @@ import noChatPage from "../pages/no-chat/index";
 import ProfilePage from "../pages/profile/index";
 import openChatPage from "../pages/open-chat/index";
 import ProfileEditPage from "../pages/profile-edit/index";
-import Modal from '../module/modal'
+import Modal from '../module/modal';
+import '../scss/style.scss';
 
 new Modal();
 

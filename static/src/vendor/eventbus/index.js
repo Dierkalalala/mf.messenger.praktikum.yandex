@@ -1,33 +1,33 @@
 class EventBus {
-    constructor() {
-        this.listeners = {};
+  constructor() {
+    this.listeners = {};
+  }
+  on(event, callback) {
+    if (this.listeners[event] === undefined) {
+      this.listeners[event] = [callback];
+      return;
     }
-    on(event, callback) {
-        if (this.listeners[event] === undefined) {
-            this.listeners[event] = [callback];
-            return;
-        }
-        this.listeners[event].push(callback);
+    this.listeners[event].push(callback);
+  }
+  off(event, callback) {
+    this._checkEventForExisence(event);
+    if (this.listeners[event] !== undefined) {
+      // @ts-ignore
+      this.listeners[event] = this.listeners[event].filter((ecallback) => ecallback !== callback);
     }
-    off(event, callback) {
-        this._checkEventForExisence(event);
-        if (this.listeners[event] !== undefined) {
-            // @ts-ignore
-            this.listeners[event] = this.listeners[event].filter((ecallback) => ecallback !== callback);
-        }
+  }
+  emit(event, ...args) {
+    this._checkEventForExisence(event);
+    this.listeners[event].forEach((callback) => {
+      const callbackFunction = callback.bind(null, ...args);
+      callbackFunction();
+    });
+  }
+  _checkEventForExisence(event) {
+    if (this.listeners[event] == undefined) {
+      throw new Error(`Нет события ${event}`);
     }
-    emit(event, ...args) {
-        this._checkEventForExisence(event);
-        this.listeners[event].forEach((callback) => {
-            let callbackFunction = callback.bind(null, ...args);
-            callbackFunction();
-        });
-    }
-    _checkEventForExisence(event) {
-        if (this.listeners[event] == undefined) {
-            throw new Error(`Нет события ${event}`);
-        }
-    }
+  }
 }
 export default EventBus;
-//# sourceMappingURL=index.js.map
+// # sourceMappingURL=index.js.map

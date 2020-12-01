@@ -1,4 +1,4 @@
-let pageTemplate = `
+const pageTemplate = `
         <div class="page-wrapper">
     <div class="d-flex messenger-main-page">
         {{{components.sidebar}}}
@@ -135,4 +135,4 @@ let pageTemplate = `
 </div>
     `;
 export default pageTemplate;
-//# sourceMappingURL=template.js.map
+// # sourceMappingURL=template.js.map

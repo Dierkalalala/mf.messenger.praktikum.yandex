@@ -1,32 +1,57 @@
 const path = require( 'path' );
-
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
 
-    // bundling mode
-    mode: 'development',
+  // bundling mode
+  mode: 'production',
 
-    // entry files
-    entry: './static/dist/script/main.js',
+  // entry files
+  entry: './static/src/script/main.ts',
 
-    // output bundles (location)
-    output: {
-        path: path.resolve( __dirname, 'static/' ),
-        filename: 'main.js',
-    },
+  // output bundles (location)
+  output: {
+    path: path.resolve( __dirname + '/static/dist/'),
+    filename: 'bundle.js',
+  },
 
-    // file resolutions
-    resolve: {
-        extensions: [ '.ts', '.js' ],
-    },
+  // file resolutions
+  resolve: {
+    extensions: ['.ts', '.js'],
+  },
 
-    // loaders
-    module: {
-        rules: [
-            {
-                test: /\.tsx?/,
-                use: 'ts-loader',
-                exclude: /node_modules/,
-            }
-        ]
-    }
+  // loaders
+  module: {
+    rules: [
+      {
+        test: /\.tsx?/,
+        use: [
+          {
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: true,
+            },
+          },
+        ],
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.(sa|sc|c)ss$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          'css-loader',
+          'postcss-loader',
+          'sass-loader',
+        ],
+      },
+    ],
+  },
+  plugins: [
+
+    new MiniCssExtractPlugin({
+      filename: 'bundle.css',
+    }),
+
+  ],
 };

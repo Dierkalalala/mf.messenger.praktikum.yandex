@@ -11,6 +11,8 @@
 Деплой данного проекта происходит на сервис «[Netlify](https://app.netlify.com/)». Посмотреть рабочую версию проекта
 можно по данной  «[ссылке](https://silly-goodall-247417.netlify.app/)»
 
+Деплой данного проект на  «[heroku](https://y-messenger.herokuapp.com/)» 
+
 
 ## Запуск проекта
 ```
@@ -28,3 +30,5 @@ npm test
 npm run prepare
 npm run build
 ```
+
+
