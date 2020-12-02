@@ -42,9 +42,8 @@
   "scripts": {
     "test": "./node_modules/.bin/mocha",
     "start": "node server.js",
-    "prefix-css": "postcss --use autoprefixer -b 'last versions' static/assets/css/style.css -o static/assets/css/style.css",
     "prepare": "tsc",
-    "build": "node add-ext"
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -64,7 +63,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "npm-run-all test lint:all",
-      "pre-push": "npm run other command",
+      "pre-push": "npm run other command"
     }
   }
 }
