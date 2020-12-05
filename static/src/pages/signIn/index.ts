@@ -79,6 +79,7 @@ class signInPage extends Block {
     }
 
     render() {
+        // @ts-ignore
         return Mustache.render(pageTemplate, this.props);
     }
 
@@ -101,9 +102,9 @@ class signInPage extends Block {
                     });
                     const json = JSON.stringify(object);
                     AuthApiClass.signIn(json)
-                        .then(resp => {
+                        .then((resp : Prop)=> {
                             if (resp.status === 401) {
-                                this.props = {...this.props, reason: resp.response.reason};
+                                this.props = {...this.props, reason: (resp.response as Prop).reason};
                                 this.eventBus.emit(Block.EVENTS.FLOW_CDU);
                             }
                             if (resp.status === 200) {

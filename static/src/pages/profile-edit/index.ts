@@ -26,6 +26,7 @@ class ProfileEditPage extends Block {
     savePersonalDataButton: Button;
     savePasswordButton: Button;
     sidebar: Sidebar;
+    private static profilePageElement: HTMLElement;
 
     constructor() {
         super('div');
@@ -66,7 +67,7 @@ class ProfileEditPage extends Block {
         return new Promise((resolve, reject) => {
             isAuth('/profile-edit');
             UserApiClass
-                .getUserById(store.auth.id)
+                .getUserById((store.auth.id as string))
                 .then(res => resolve(res))
                 .catch(err => reject(err))
         })
@@ -74,12 +75,13 @@ class ProfileEditPage extends Block {
     }
 
     render() {
+        // @ts-ignore
         return Mustache.render(pageTemplate, this.props);
     }
 
     renderTo() {
         this._fetchData()
-            .then(res => {
+            .then((res: Prop) => {
                 this.savePersonalDataButton = new Button({
                     type: 'submit',
                     className: 'default-button',
@@ -97,7 +99,7 @@ class ProfileEditPage extends Block {
                             sidebar: this.sidebar.render(),
                             saveButton: this.savePersonalDataButton.render(),
                             savePassButton: this.savePasswordButton.render()
-                        }, name: res.response.first_name, profile_img: '', details: [
+                        }, name: (res.response as Prop).first_name, profile_img: '', details: [
                             {
                                 name: 'Имя',
                                 input: {
@@ -166,7 +168,9 @@ class ProfileEditPage extends Block {
                         ]
                     }
                 );
-
+                if (this.rootElement == null) {
+                    return;
+                }
                 try {
                     this.rootElement.removeChild(ProfileEditPage.profilePageElement);
                 } catch (e) {
@@ -179,7 +183,7 @@ class ProfileEditPage extends Block {
 
                 ProfileEditPage.profilePageElement.style.display = 'none';
 
-                if (router._currentRoute._pathname === '/profile-edit') {
+                if (router._currentRoute && router._currentRoute._pathname === '/profile-edit') {
                     ProfileEditPage.profilePageElement.style.display = 'block';
                 }
 
@@ -226,7 +230,7 @@ class ProfileEditPage extends Block {
                             const json = JSON.stringify(object);
                             UserApiClass
                                 .changeUserProfile(json)
-                                .then(res => {
+                                .then((res : Prop) => {
                                     if (res.status === 200) {
                                         store.set('auth', res.response);
                                         store.set('users', res.response);

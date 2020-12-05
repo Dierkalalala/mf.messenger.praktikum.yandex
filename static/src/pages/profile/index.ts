@@ -4,7 +4,9 @@ import pageTemplate from './template';
 import Block from "../../vendor/block/index";
 import Router from "../../vendor/router/index";
 import AuthApiClass from "../../api/auth-api";
-
+interface Prop {
+    [key: string]: unknown
+}
 const router = new Router('.app');
 
 
@@ -21,6 +23,7 @@ class ProfilePage extends Block {
     rootElement: HTMLElement | null;
     profilePageElement: HTMLElement;
     sidebar: Sidebar
+    private static profilePageElement: HTMLElement;
 
     constructor() {
         super('div');
@@ -65,12 +68,14 @@ class ProfilePage extends Block {
     }
 
     render() {
+        // @ts-ignore
         return Mustache.render(pageTemplate, this.props);
     }
 
     renderTo() {
+
         this._fetchData()
-            .then(res => {
+            .then((res: Prop) => {
                 this.sidebar = new Sidebar({href: '/no-chat'}) as Sidebar;
                 this.props = Object.assign(Object.assign({}, this.props),
                     {
@@ -90,6 +95,9 @@ class ProfilePage extends Block {
                             }
                         ]
                     });
+                if (this.rootElement == null) {
+                    return;
+                }
                 try {
 
                     this.rootElement.removeChild(ProfilePage.profilePageElement);
@@ -106,7 +114,7 @@ class ProfilePage extends Block {
 
                 ProfilePage.profilePageElement.style.display = 'none';
 
-                if (router._currentRoute._pathname === '/profile') {
+                if (router._currentRoute && router._currentRoute._pathname === '/profile') {
                     ProfilePage.profilePageElement.style.display = 'block';
                 }
 

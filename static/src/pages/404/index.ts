@@ -1,4 +1,5 @@
 import Error from '../../components/httpError/Index';
+
 interface Prop {
     code: number,
     message: string,

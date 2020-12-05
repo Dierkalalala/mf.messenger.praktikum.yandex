@@ -5,7 +5,6 @@ import Sidebar from "../../components/sidebar/index";
 import store from "../../vendor/state/index";
 import chatsApiHandler from '../../api/chats-api';
 import Router from "../../vendor/router/index";
-
 let router = new Router('.app');
 
 interface Prop {
@@ -15,6 +14,7 @@ interface Prop {
 class noChatPage extends Block {
     sidebar: Sidebar;
     noChatPageElement : unknown;
+    private static noChatPageElement: HTMLElement;
     constructor() {
         super('div');
         this.noChatPageElement = '';
@@ -35,7 +35,7 @@ class noChatPage extends Block {
                 resolve(store.chats);
             } else {
                 chatsApiHandler.getAllChats()
-                    .then((res) => {
+                    .then((res: Prop) => {
                         store.set('chats',res.response);
                         resolve(res.response)
                     })
@@ -49,6 +49,7 @@ class noChatPage extends Block {
     }
 
     render() {
+        // @ts-ignore
         return Mustache.render(pageTemplate, this.props);
     }
 
@@ -83,19 +84,20 @@ class noChatPage extends Block {
 
         createNewChatButton.addEventListener('submit', (e: Event) => {
             e.preventDefault();
-            let target: HTMLFormElement = e.target;
+            let target: HTMLFormElement = e.target as HTMLFormElement;
             if (target == null) {
                 return;
             }
-            let targetInputTitle = target.title.value;
+            let targetInput : unknown = target.title as unknown;
+            let targetInputTitle: string = (targetInput as HTMLInputElement).value;
             let data = JSON.stringify({title: targetInputTitle});
             chatsApiHandler.createChat(data)
-                .then(res => {
+                .then( (res : Prop) => {
                     if (res.status === 200) {
                         chatsApiHandler.getAllChats()
                             .then((res : Prop) => {
                                 store.set('chats', res.response);
-                                this.updateSideBar(res.response);
+                                this.updateSideBar((res.response as Prop));
                                 this.updateHTMLContent();
                             })
                             .catch(err => console.log(err));

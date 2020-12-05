@@ -12,13 +12,12 @@ interface Prop {
 }
 
 class openChatPage extends Block {
-    private openChatPageElement: HTMLDivElement;
     sidebar: ChatSidebar
+    private static openChatPageElement: HTMLElement;
 
     constructor() {
         super('div');
 
-        this.openChatPageElement = document.createElement('div');
     }
 
     updateHTMLContent() {
@@ -45,7 +44,7 @@ class openChatPage extends Block {
                 resolve(store.chats);
             } else {
                 chatsApiHandler.getAllChats()
-                    .then(res => {
+                    .then( (res: Prop) => {
                         store.set('chats', res.response);
                         resolve(res.response);
                     })
@@ -58,7 +57,7 @@ class openChatPage extends Block {
 
             chatsApiHandler
                 .getChatUsers(store.get('activeChat').id)
-                .then(res => {
+                .then((res: Prop) => {
                     resolve(res.response)
                 })
                 .catch(err => reject(err))
@@ -68,6 +67,7 @@ class openChatPage extends Block {
     }
 
     render() {
+        // @ts-ignore
         return Mustache.render(pageTemplate, this.props);
     }
 
@@ -76,7 +76,7 @@ class openChatPage extends Block {
 
             chatsApiHandler
                 .getChatUsers(store.get('activeChat').id)
-                .then(res => {
+                .then((res : Prop) => {
                     resolve(res.response)
                 })
                 .catch(err => reject(err))
@@ -179,10 +179,10 @@ class openChatPage extends Block {
             let targetInputTitle = (target as HTMLFormElement).title as unknown as HTMLInputElement
             let data = JSON.stringify({title: targetInputTitle});
             chatsApiHandler.createChat(data)
-                .then(res => {
+                .then((res : Prop) => {
                     if (res.status === 200) {
                         chatsApiHandler.getAllChats()
-                            .then(res => {
+                            .then((res: Prop) => {
                                 store.set('chats', res.response);
                                 this.props = {
                                     ...this.props,
@@ -240,7 +240,7 @@ class openChatPage extends Block {
                 chatId: store.get('activeChat').id
             });
             chatsApiHandler.addUserToChat(data)
-                .then(res => {
+                .then((res: Prop) => {
                     if (res.status === 200) {
                         let modalOverlay = document.querySelector('.modal-overlay');
                         if (modalOverlay !== null) {

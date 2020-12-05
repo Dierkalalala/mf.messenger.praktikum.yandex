@@ -1,6 +1,5 @@
 import Block from '../../vendor/block/index'
 import template from './template';
-
 interface Props{
     messages: Array<Prop>
 }
@@ -21,7 +20,7 @@ class Messages extends Block {
     }
 
     render() {
-
+// @ts-ignore
         return Mustache.render(template, this.props);
     }
 }

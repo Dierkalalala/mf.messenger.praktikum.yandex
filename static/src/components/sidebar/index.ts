@@ -2,7 +2,7 @@ import Block from '../../vendor/block/index'
 import template from './template';
 
 interface Prop {
-    [key: string] : unknown
+    [key: string]: unknown
 }
 
 
@@ -19,7 +19,7 @@ class Sidebar extends Block {
 
     render() {
         // В проект должен быть ваш собственный шаблонизатор
-
+// @ts-ignore
         return Mustache.render(template, this.props);
     }
 }

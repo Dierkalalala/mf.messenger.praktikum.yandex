@@ -1,5 +1,6 @@
 /static/dist
 /static/**/*.min.js
 /static/**/*.js
-
 /node_modules
+/server.js
+/add-ext.js

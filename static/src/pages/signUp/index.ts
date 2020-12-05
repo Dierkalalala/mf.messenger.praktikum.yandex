@@ -6,7 +6,6 @@ import pageTemplate from './template';
 import AuthApiClass from "../../api/auth-api";
 import Router from "../../vendor/router/index";
 import checkForAuth from '../../module/isAuth'
-
 const router = new Router('.app');
 
 interface Prop {
@@ -108,6 +107,7 @@ class signUpPage extends Block {
     }
 
     render() {
+        // @ts-ignore
         return Mustache.render(pageTemplate, this.props);
     }
 
@@ -128,10 +128,10 @@ class signUpPage extends Block {
                     });
                     const json = JSON.stringify(object);
                     AuthApiClass.singUp(json)
-                        .then(resp => {
+                        .then( (resp: Prop) => {
                             console.log(resp);
                             if (resp.status === 400 || resp.status === 409) {
-                                this.props = {...this.props, reason: resp.response.reason};
+                                this.props = {...this.props, reason: (resp.response as Prop).reason};
                                 this.eventBus.emit(Block.EVENTS.FLOW_CDU);
                             }
                             if (resp.status === 200) {

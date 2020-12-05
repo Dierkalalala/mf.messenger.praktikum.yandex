@@ -39,10 +39,14 @@ function clickToLink(e: MouseEvent) {
         } catch (e) {
             console.log(e)
         }
-    });
-    if (isAnchor) {
+    }) as null | HTMLElement;
+    if (isAnchor !== null) {
         e.preventDefault();
-        router.go(isAnchor.getAttribute('href'));
+        let route = isAnchor.getAttribute('href');
+        if (route !== null) {
+            router.go(route);
+        }
+
     }
 }
 
