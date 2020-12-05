@@ -47,7 +47,8 @@
     "start": "node server.js",
     "prepare": "tsc",
     "build": "webpack",
-    "lint": "node_modules/.bin/eslint ."
+    "lint": "node_modules/.bin/eslint .",
+    "docker": "docker build --tag y-messenger ."
   },
   "repository": {
     "type": "git",
@@ -66,8 +67,7 @@
   "homepage": "https://github.com/Dierkalalala/mf.messenger.praktikum.yandex#readme",
   "husky": {
     "hooks": {
-      "pre-commit": "npm-run-all test lint:all",
-      "pre-push": "npm run other command"
+      "pre-commit": "npm run lint"
     }
   }
 }
