@@ -6,7 +6,7 @@
   "dependencies": {
     "@types/mustache": "^4.0.1",
     "babel-plugin-replace-ts-export-assignment": "0.0.2",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "jsdom": "^16.4.0",
     "postcss": "^8.1.4"
   },
